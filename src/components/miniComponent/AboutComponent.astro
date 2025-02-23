@@ -1,0 +1,58 @@
+---
+// ConceptDiscovery.astro
+interface Props {
+  number: string;
+  conceptText: string;
+  discoveryImage: {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+  };
+  heading: string;
+  description: string;
+}
+
+const { 
+  number = "01",
+  conceptText = "CONCEPT",
+  discoveryImage,
+  heading = "Heading",
+  description = "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+} = Astro.props;
+---
+
+<div class="pt-8 border-t border-gray-200">
+  <div class="flex items-start gap-4 font-sans w-full pb-20">
+    {/* Number */}
+    <div class="text-xl text-gray-800 font-medium w-[5%]">
+      {number}.
+    </div>
+
+    {/* Concept Text and Discovery Image */}
+    <div class="relative w-[50%] px-4">
+      <div class="text-[8rem] font-black leading-none tracking-tight">
+        {conceptText}
+      </div>
+      <div class="absolute -bottom-20 left-20 w-[60%]">
+        <img 
+          src={discoveryImage.src}
+          alt={discoveryImage.alt}
+          width={discoveryImage.width}
+          height={discoveryImage.height}
+          class="w-auto h-auto"
+        />
+      </div>
+    </div>
+
+    {/* Text Content */}
+    <div class="w-[45%] pt-8">
+      <h2 class="text-2xl font-semibold mb-2">
+        {heading}
+      </h2>
+      <p class="text-base leading-relaxed text-gray-600 italic">
+        {description}
+      </p>
+    </div>
+  </div>
+</div>

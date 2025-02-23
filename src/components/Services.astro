@@ -1,0 +1,77 @@
+---
+const services = [
+  {
+    icon: "1",
+    title: "WEBSITE DESIGN",
+    description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+  },
+  {
+    icon: "2",
+    title: "SEO-FRIENDLY WEBSITE",
+    description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+  },
+  {
+    icon: "3",
+    title: "WEB DEVELOPMENT",
+    description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+  },
+  {
+    icon: "4",
+    title: "E-COMMERCE SOLUTIONS",
+    description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+  },
+  {
+    icon: "5",
+    title: "APP DEVELOPMENT",
+    description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+  },
+  {
+    icon: "1",
+    title: "WEBSITE REDESIGN",
+    description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+  }
+];
+---
+
+<!-- Tilted strips container -->
+<div class="relative w-full h-24 overflow-visible">
+  <!-- Grey strip - adjusted to show full width -->
+  <div class="absolute w-[120%] left-[-10%] transform -rotate-6" style="top: -24px;">
+    <img src="/grey-strip.png" alt="Grey Strip" class="w-full h-24 object-cover" />
+  </div>
+  <!-- Orange/new strip -->
+  <div class="absolute w-full transform rotate-6" style="top: -24px;">
+    <img src="/new-strip.png" alt="Orange Strip" class="w-full h-24 object-cover" />
+  </div>
+</div>
+
+<!-- Main content with background -->
+<div class="w-full bg-[url('/main-bg-1.png')] py-20">
+  <!-- Services grid -->
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+      {services.map((service) => (
+        <div class="relative p-6 rounded-[2rem] border-2 border-orange-500" style="border-radius: 2rem 2rem 2rem 2rem;">
+          <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white p-2 rounded-lg border-2 border-blue-600">
+            <img 
+              src={`/icons/${service.icon}.png`} 
+              alt={service.title} 
+              class="w-8 h-8 text-blue-600"
+            />
+          </div>
+          <h3 class="text-xl font-bold text-orange-500 mt-4 text-center">{service.title}</h3>
+          <p class="mt-2 text-gray-600 italic text-center font-mono">{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Custom curved border shape for service boxes */
+  .rounded-custom {
+    border-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+  }
+</style>

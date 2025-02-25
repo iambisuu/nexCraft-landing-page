@@ -1,0 +1,105 @@
+---
+// TestimonialSlider.astro
+const testimonials = [
+  {
+    name: "Qadira",
+    text: "\"We couldn't be happier with our new e-commerce platform. The team created a beautiful, intuitive site that not only showcases our products but also makes shopping a pleasure for our customers. Since launching, we've seen a noticeable increase in both traffic and revenue. They truly helped us create the seamless experience we envisioned.\""
+  },
+  {
+    name: "PredictHer",
+    text: "\"The UI/UX design this team crafted has transformed our reach and significantly enhanced our user experience. Their expertise brought our vision to life, enabling us to empower more women through an intuitive and seamless health tracking experience. Thanks to their work, we now have a visually engaging and user-centered platform that resonates with our mission and audience.\""
+  },
+  {
+    name: "Quil and Coin",
+    text: "\"Partnering with this team was one of the best decisions we made. They created a sleek, user-friendly website that captures our mission perfectly. Now, registration and payment processes are fully streamlined, allowing our clients to focus on their events while we handle the details behind the scenes. This website has truly elevated our business, making it easier than ever for us to deliver on our promise.\""
+  }
+  ,
+  {
+    name: "Quil and Coin",
+    text: "\"Partnering with this team was one of the best decisions we made. They created a sleek, user-friendly website that captures our mission perfectly. Now, registration and payment processes are fully streamlined, allowing our clients to focus on their events while we handle the details behind the scenes. This website has truly elevated our business, making it easier than ever for us to deliver on our promise.\""
+  }
+  ,
+  {
+    name: "Quil and Coin",
+    text: "\"Partnering with this team was one of the best decisions we made. They created a sleek, user-friendly website that captures our mission perfectly. Now, registration and payment processes are fully streamlined, allowing our clients to focus on their events while we handle the details behind the scenes. This website has truly elevated our business, making it easier than ever for us to deliver on our promise.\""
+  }
+  ,
+  {
+    name: "Quil and Coin",
+    text: "\"Partnering with this team was one of the best decisions we made. They created a sleek, user-friendly website that captures our mission perfectly. Now, registration and payment processes are fully streamlined, allowing our clients to focus on their events while we handle the details behind the scenes. This website has truly elevated our business, making it easier than ever for us to deliver on our promise.\""
+  }
+];
+---
+
+<div class="relative w-full h-screen p-16 mt-20  bg-cover bg-center overflow-hidden" style="background-image: url('/bg-2.png');">
+  <div class="mb-8">
+    <h1 class="font-black text-5xl uppercase tracking-tight leading-none md:text-6xl">
+      What People <span class="text-[#f4813f]">Say</span> ??
+    </h1>
+  </div>
+  
+  <div id="testimonial-slider" class="flex mt-32 gap-12 w-full overflow-x-auto pb-4 scrollbar-hide">
+    {testimonials.map((testimonial) => (
+      <div class="relative bg-white rounded-3xl p-6 min-w-[300px] max-w-[350px] flex-none shadow-md border border-gray-100">
+        <div class="absolute text-[#f4813f] text-7xl font-serif leading-none top-1 left-3">"</div>
+        <div class="pt-6">
+          <h3 class="text-xl font-bold mb-2">{testimonial.name}</h3>
+          <p class="text-sm leading-relaxed text-gray-800">{testimonial.text}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+  
+  <div class="flex justify-center gap-4 mt-4">
+    <button id="prev-btn" aria-label="Previous testimonial" class="bg-[#f4813f] text-white rounded-full w-10 h-10 flex items-center justify-center text-xl hover:bg-[#e87020] transition-colors">&lt;</button>
+    <button id="next-btn" aria-label="Next testimonial" class="bg-[#f4813f] text-white rounded-full w-10 h-10 flex items-center justify-center text-xl hover:bg-[#e87020] transition-colors">&gt;</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('testimonial-slider');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    let scrollAmount = 0;
+    const scrollStep = 350; // Width of one testimonial box + gap
+    
+    if (slider && nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        scrollAmount += scrollStep;
+        if (scrollAmount > slider.scrollWidth - slider.clientWidth) {
+          scrollAmount = slider.scrollWidth - slider.clientWidth;
+        }
+        slider.scrollTo({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+    }
+    
+    if (slider && prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        scrollAmount -= scrollStep;
+        if (scrollAmount < 0) {
+          scrollAmount = 0;
+        }
+        slider.scrollTo({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  /* This adds the scrollbar-hide utility that isn't in core Tailwind */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>

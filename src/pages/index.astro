@@ -3,6 +3,11 @@ import '../styles/tailwind.css';
 import ServicesSection from '../components/Services.astro';
 import Hero from '../components/Hero.astro';
 import WhyChooseUs from '../components/WhyChooseUs.astro';
+import Workers from '../components/Workers.astro';
+import Projects from '../components/Projects.astro';
+import Testimonial from '../components/Testimonial.astro';
+import Showcase from '../components/Showcase.astro';
+import KeyMetrix from '../components/KeyMetrix.astro';
 ---
 
 
@@ -16,5 +21,13 @@ import WhyChooseUs from '../components/WhyChooseUs.astro';
     <Hero/>
     <ServicesSection />
     <WhyChooseUs/>
+    <Workers/>
+    <Projects 
+      imageSrc="qadira.png" 
+      imageAlt="Image description" 
+    />
+    <Testimonial />
+    <Showcase/>
+    <KeyMetrix/>
   </body>
 </html>

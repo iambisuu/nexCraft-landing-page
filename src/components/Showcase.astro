@@ -1,0 +1,138 @@
+---
+// WebDevShowcase.astro
+
+// Define the images for the carousel
+const carouselImages = [
+  {
+    url: "/nexcraft.png",
+    caption: "Work when your Boss is Chill 😎"
+  },
+  {
+    url: "/nexcraftTeam.png",
+    caption: ""
+  },
+  {
+    url: "/nexcraft.png",
+    caption: "Work when your Boss is Chill 😎"
+  },
+  {
+    url: "/nexcraftTeam.png",
+    caption: ""
+  },
+  {
+    url: "/nexcraft.png",
+    caption: "Work when your Boss is Chill 😎"
+  }
+];
+---
+
+<div class="w-full">
+  <!-- Orange Header Section -->
+  <div class="w-full bg-[#e67532] text-center py-8 md:py-12 lg:py-16">
+    <div class="container mx-auto px-4">
+      <!-- Hashtag Categories -->
+      <div class="flex flex-wrap justify-center space-x-2 sm:space-x-6 md:space-x-10 lg:space-x-16 text-[#f6b695] text-lg sm:text-2xl md:text-3xl lg:text-4xl mb-4 md:mb-6 lg:mb-8">
+        <span>#websites</span>
+        <span>#developer</span>
+        <span>#apps</span>
+      </div>
+      
+      <!-- Main Heading -->
+      <h1 class="text-[#7d3618] text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold italic tracking-tighter">
+        #WEBDeveloper
+      </h1>
+    </div>
+  </div>
+  
+  <!-- Carousel Section - Responsive based on screen size -->
+  <div class="w-full overflow-hidden">
+    <!-- Mobile Carousel (scrollable) -->
+    <div id="image-carousel-mobile" class="flex overflow-x-auto snap-x snap-mandatory md:hidden">
+      {carouselImages.map((image) => (
+        <div class="relative flex-none w-full snap-center">
+          <img 
+            src={image.url} 
+            alt="Developer workspace" 
+            class="w-full h-128 sm:h-160 object-cover"
+          />
+          {image.caption && (
+            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center">
+              {image.caption}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    
+    <!-- Tablet Carousel (2 images visible) -->
+    <div id="image-carousel-tablet" class="hidden md:flex lg:hidden">
+      {carouselImages.map((image) => (
+        <div class="relative flex-none w-1/2">
+          <img 
+            src={image.url} 
+            alt="Developer workspace" 
+            class="w-full h-160 object-cover"
+          />
+        </div>
+      ))}
+    </div>
+    
+    <!-- Desktop Carousel (all 5 images visible) -->
+    <div id="image-carousel-desktop" class="hidden lg:flex">
+      {carouselImages.map((image) => (
+        <div class="relative flex-none w-1/5">
+          <img 
+            src={image.url} 
+            alt="Developer workspace" 
+            class="w-full h-160 xl:h-104 object-cover"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Optional: Add JavaScript for mobile carousel navigation
+  document.addEventListener('DOMContentLoaded', () => {
+    // You could add touch swipe or button navigation here
+    // This is a basic example of how you might implement it
+    const mobileCarousel = document.getElementById('image-carousel-mobile');
+    if (mobileCarousel) {
+      // Handle scroll events, add navigation buttons, etc.
+      // Example implementation would go here
+    }
+  });
+</script>
+
+<style>
+  /* Additional styles for responsiveness */
+  /* Use native CSS features for smoother scrolling */
+  #image-carousel-mobile {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  #image-carousel-mobile::-webkit-scrollbar {
+    display: none;
+  }
+  
+  #image-carousel-mobile {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Custom height classes for taller images */
+  .h-128 {
+    height: 25rem; /* 512px - doubled from 16rem */
+  }
+  
+  .h-160 {
+    height: 30rem; /* 640px - doubled from 20rem */
+  }
+  
+  .h-208 {
+    height: 32rem; /* 832px - doubled from 26rem */
+  }
+</style>

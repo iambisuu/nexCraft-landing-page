@@ -1,0 +1,59 @@
+---
+// Qadira.astro - E-commerce showcase component with Tailwind CSS
+import { Image } from 'astro:assets';
+
+interface Props {
+  clientName?: string;
+  testimonial?: string;
+  timeframe?: string;
+  services?: string[];
+  imageSrc: string;
+  imageAlt: string;
+}
+
+const {
+  clientName = "Qadira",
+  testimonial = "We couldn't be happier with our new e-commerce platform. The team created a beautiful, intuitive site that not only showcases our products but also makes shopping a pleasure for our customers. Since launching, ",
+  timeframe = "02/2024- present",
+  services = ["UI & UX design", "Development"],
+  imageSrc = "/images/qadira-showcase.jpg",
+  imageAlt = "People showcasing Qadira sanitary products"
+} = Astro.props;
+---
+
+<div class="w-full max-w-6xl  mx-auto">
+  <!-- Main showcase section - black outer container -->
+  <div class="bg-black rounded-xl overflow-hidden shadow-lg">
+    <!-- Red middle box - touches left and top edges of black box -->
+    <div class="bg-red-500 rounded-t-lg ml-[8%] mr-[8%] mt-[2%] overflow-hidden">
+      <!-- Content box with only image -->
+      <div class="bg-stone-50 rounded-lg m-3 overflow-hidden">
+        <img src={imageSrc} alt={imageAlt} class="w-full h-full object-cover" />
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bottom info section - aligned to edges of black box -->
+  <div class="grid grid-cols-3 gap-4 mt-4">
+    <!-- Client info -->
+    <div>
+      <p class="text-sm">Client Project</p>
+      <p class="font-bold">{clientName}</p>
+    </div>
+    
+    <!-- Testimonial -->
+    <div>
+      <p class="text-xs leading-tight">"{testimonial}"</p>
+    </div>
+    
+    <!-- Project details -->
+    <div class="text-right">
+      <p class="text-xs mb-1">{timeframe}</p>
+      <ul class="text-xs">
+        {services.map((service) => (
+          <li>• {service}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</div>

@@ -22,35 +22,35 @@ const {
 } = Astro.props;
 ---
 
-<div class="pt-8 border-t border-gray-200">
-  <div class="flex items-start gap-4 font-sans w-full pb-20">
+<div class="pt-6 sm:pt-8 border-t border-gray-200 max-sm:px-4">
+  <div class="flex flex-col md:flex-row items-start gap-4 font-sans w-full pb-10 sm:pb-16 md:pb-20">
     {/* Number */}
-    <div class="text-xl text-gray-800 font-medium w-[5%]">
+    <div class="text-lg sm:text-xl text-gray-800 font-medium w-full md:w-[5%] mb-2 md:mb-0">
       {number}.
     </div>
 
     {/* Concept Text and Discovery Image */}
-    <div class="relative w-[50%] px-4">
-      <div class="text-[8rem] font-black leading-none tracking-tight">
+    <div class="relative w-full md:w-[50%] px-2 sm:px-4 mb-8 md:mb-0">
+      <div class="text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] font-black leading-none tracking-tight">
         {conceptText}
       </div>
-      <div class="absolute -bottom-20 left-20 w-[60%]">
+      <div class="relative md:absolute mt-4 md:mt-0 md:-bottom-20 md:left-20 w-full sm:w-[80%] md:w-[60%]">
         <img 
           src={discoveryImage.src}
           alt={discoveryImage.alt}
           width={discoveryImage.width}
           height={discoveryImage.height}
-          class="w-auto h-auto"
+          class="w-auto h-auto max-w-full"
         />
       </div>
     </div>
 
     {/* Text Content */}
-    <div class="w-[45%] pt-8">
-      <h2 class="text-2xl font-semibold mb-2">
+    <div class="w-full md:w-[45%] pt-0 md:pt-8">
+      <h2 class="text-xl sm:text-2xl font-semibold mb-2">
         {heading}
       </h2>
-      <p class="text-base leading-relaxed text-gray-600 italic">
+      <p class="text-sm sm:text-base leading-relaxed text-gray-600 italic">
         {description}
       </p>
     </div>

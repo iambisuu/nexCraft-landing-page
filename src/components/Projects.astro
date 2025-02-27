@@ -13,7 +13,7 @@ interface Props {
 
 const {
   clientName = "Qadira",
-  testimonial = "We couldn't be happier with our new e-commerce platform. The team created a beautiful, intuitive site that not only showcases our products but also makes shopping a pleasure for our customers. Since launching, ",
+  testimonial = "We couldn't be happier with our new e-commerce platform. The team created a beautiful, intuitive site ",
   timeframe = "02/2024- present",
   services = ["UI & UX design", "Development"],
   imageSrc = "/images/qadira-showcase.jpg",
@@ -21,7 +21,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="w-full max-w-6xl  mx-auto">
+<div class="w-full max-w-6xl px-4  mx-auto">
   <!-- Main showcase section - black outer container -->
   <div class="bg-black rounded-xl overflow-hidden shadow-lg">
     <!-- Red middle box - touches left and top edges of black box -->
@@ -49,7 +49,7 @@ const {
     <!-- Project details -->
     <div class="text-right">
       <p class="text-xs mb-1">{timeframe}</p>
-      <ul class="text-xs">
+      <ul class="text-xs ">
         {services.map((service) => (
           <li>• {service}</li>
         ))}

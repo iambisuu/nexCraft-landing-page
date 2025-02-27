@@ -1,14 +1,10 @@
 ---
-// ConceptDiscovery.astro
 interface Props {
   number: string;
   conceptText: string;
-  discoveryImage: {
-    src: string;
-    alt: string;
-    width?: number;
-    height?: number;
-  };
+  conceptSize?: string; // Accepts values like "80vh", "100px", etc.
+  accentText?: string;
+  accentTextSize?: string; // Accepts values like "40vh", "50px", etc.
   heading: string;
   description: string;
 }
@@ -16,7 +12,9 @@ interface Props {
 const { 
   number = "01",
   conceptText = "CONCEPT",
-  discoveryImage,
+  conceptSize = "100vh", // Default desktop size
+  accentText = "Discovery",
+  accentTextSize = "50vh", // Default accent text size
   heading = "Heading",
   description = "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
 } = Astro.props;
@@ -24,28 +22,31 @@ const {
 
 <div class="pt-6 sm:pt-8 border-t border-gray-200 max-sm:px-4">
   <div class="flex flex-col md:flex-row items-start gap-4 font-sans w-full pb-10 sm:pb-16 md:pb-20">
-    {/* Number */}
+    
+    <!-- Number -->
     <div class="text-lg sm:text-xl text-gray-800 font-medium w-full md:w-[5%] mb-2 md:mb-0">
       {number}.
     </div>
 
-    {/* Concept Text and Discovery Image */}
+    <!-- Concept Text and Accent Text -->
     <div class="relative w-full md:w-[50%] px-2 sm:px-4 mb-8 md:mb-0">
-      <div class="text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] font-black leading-none tracking-tight">
+      <div 
+        class="font-black leading-none tracking-tight concept-text"
+        style={`font-size: ${conceptSize};`} 
+      >
         {conceptText}
       </div>
       <div class="relative md:absolute mt-4 md:mt-0 md:-bottom-20 md:left-20 w-full sm:w-[80%] md:w-[60%]">
-        <img 
-          src={discoveryImage.src}
-          alt={discoveryImage.alt}
-          width={discoveryImage.width}
-          height={discoveryImage.height}
-          class="w-auto h-auto max-w-full"
-        />
+        <p 
+          class="font-cursive text-[#FC6403] accent-text"
+          style={`font-size: ${accentTextSize};`}
+        >
+          {accentText}
+        </p>
       </div>
     </div>
 
-    {/* Text Content */}
+    <!-- Text Content -->
     <div class="w-full md:w-[45%] pt-0 md:pt-8">
       <h2 class="text-xl sm:text-2xl font-semibold mb-2">
         {heading}
@@ -56,3 +57,19 @@ const {
     </div>
   </div>
 </div>
+
+<style>
+  .font-cursive {
+    font-family: 'Brush Script MT', cursive, serif;
+  }
+
+  /* Mobile Fallback Size */
+  @media (max-width: 768px) {
+    .concept-text {
+      font-size: 7vh !important; /* Adjust for smaller screens */
+    }
+    .accent-text {
+      font-size: 6vh !important; /* Adjust accent text for small screens */
+    }
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+// Footer.astro
+---
+
+<footer class="relative w-full py-16 overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0 z-0">
+      <img src="/footer-bg.png" alt="Footer background" class="w-full h-full object-cover" />
+    </div>
+    
+    <!-- Star decorations -->
+    <img src="/star.png" alt="" class="absolute w-16 md:w-20 top-[25%] left-[5%] z-10" />
+    <img src="/star.png" alt="" class="absolute w-14 md:w-16 top-[15%] right-[30%] z-10" />
+    <img src="/star.png" alt="" class="absolute w-20 md:w-24 bottom-[35%] right-[15%] z-10" />
+    <img src="/star.png" alt="" class="absolute w-12 md:w-14 bottom-[15%] left-[45%] z-10" />
+    <img src="/star.png" alt="" class="absolute w-16 md:w-20 top-[50%] right-[94%] z-10" />
+    <img src="/star.png" alt="" class="absolute w-16 md:w-20 top-[50%] right-[65%] z-10" />
+
+    
+    <!-- Content -->
+    <div class="container mx-auto px-4 md:px-6 relative z-20 flex flex-col h-full">
+      <!-- Top section with links -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+        <!-- Contact info -->
+        <div>
+          <h3 class="text-white font-medium mb-6">Contact us</h3>
+          <div class="mt-8">
+            <p class="text-white text-sm mb-1">© 2024 NexCraft Media. All rights reserved.</p>
+            <p class="text-white text-sm underline mb-1">[email protected]</p>
+            <p class="text-white text-sm underline mb-6">+91 6378639929</p>
+            <a href="#" class="inline-block bg-black text-white px-5 py-2 rounded-full text-sm">Book a Call</a>
+          </div>
+        </div>
+        
+        <!-- Menu -->
+        <div>
+          <h3 class="text-white font-medium mb-6">MENU</h3>
+          <ul class="space-y-4">
+            <li><a href="#" class="text-white text-sm hover:underline">Home</a></li>
+            <li><a href="#" class="text-white text-sm hover:underline">About</a></li>
+            <li><a href="#" class="text-white text-sm hover:underline">Service</a></li>
+            <li><a href="#" class="text-white text-sm hover:underline">Projects</a></li>
+          </ul>
+        </div>
+        
+        <!-- Useful links -->
+        <div>
+          <h3 class="text-white font-medium mb-6">USEFUL LINKS</h3>
+          <ul class="space-y-4">
+            <li><a href="#" class="text-white text-sm hover:underline">Privacy policy</a></li>
+            <li><a href="#" class="text-white text-sm hover:underline">Cookie policy</a></li>
+            <li><a href="#" class="text-white text-sm hover:underline">licensing</a></li>
+            <li><a href="#" class="text-white text-sm hover:underline">404</a></li>
+          </ul>
+        </div>
+        
+        <!-- Social media -->
+        <div>
+          <h3 class="text-white font-medium ">SOCIAL MEDIA</h3>
+          <ul class="space-y-4">
+            <li><a href="#" class="text-white text-sm hover:underline">Instagram</a></li>
+            <li><a href="#" class="text-white text-sm hover:underline">Linkdien</a></li>
+            <li><a href="#" class="text-white text-sm hover:underline">Facebook</a></li>
+            <li><a href="#" class="text-white text-sm hover:underline">X (Twitter)</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Bottom section with tagline and logo, pushed to the bottom -->
+      <div class="mt-auto mb-0">
+        <!-- Tagline positioned right above the image with no gap -->
+        <div class="text-center md:text-right mb-0">
+          <!-- <h2 class="text-white text-2xl md:text-3xl font-light">We Make Dope Sites & Brands</h2> -->
+        </div>
+        
+        <!-- Logo image positioned at the bottom with no gap to the tagline -->
+        <div class="flex justify-center md:justify-end mt-0">
+          <img src="/nexcraft-name.png" alt="NexCraft" class="h-24 md:h-[24rem] w-auto" />
+        </div>
+      </div>
+    </div>
+  </footer>

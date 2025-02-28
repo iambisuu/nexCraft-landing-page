@@ -33,45 +33,111 @@ const services = [
 ];
 ---
 
-<!-- Tilted strips container -->
-<div class="relative w-full h-24 overflow-visible max-sm:hidden">
-  <!-- Grey strip - adjusted to show full width -->
-  <div class="absolute w-[120%] left-[-10%] transform -rotate-6" style="top: -24px;">
-    <img src="/grey-strip.png" alt="Grey Strip" class="w-full h-24 object-cover" />
-  </div>
-  <!-- Orange/new strip -->
-  <div class="absolute w-full transform rotate-6" style="top: -24px;">
-    <img src="/new-strip.png" alt="Orange Strip" class="w-full h-24 object-cover" />
-  </div>
-</div>
-
-<!-- Main content with background -->
-<div class="w-full bg-[url('/main-bg-1.png')] py-20 px-4">
-  <!-- Services grid -->
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
-      {services.map((service) => (
-        <div class="relative p-6 rounded-[2rem] border-2 border-orange-500" style="border-radius: 2rem 2rem 2rem 2rem;">
-          <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-white p-2 rounded-lg border-2 border-blue-600">
-            <img 
-              src={`/icons/${service.icon}.png`} 
-              alt={service.title} 
-              class="w-8 h-8 text-blue-600"
-            />
+<!-- Reference to the hero section (not included in actual component) -->
+<!-- <div class="text-center mt-4 w-screen h-screen">
+    this is the hero section
+</div> -->
+<!-- Completely standalone services section with properly aligned strips -->
+<section class="services-section relative mt-20"> 
+  <!-- Contained strip section with improved centering -->
+  <div class="strips-wrapper relative h-64 w-full overflow-hidden"> <!-- Added overflow-hidden -->
+    <!-- Container to ensure proper centering -->
+    <div class="strips-container relative w-full h-full">
+      <!-- Strips positioned to create a perfect cross in the middle -->
+      <!-- Grey strip - perfectly aligned to cross in the middle -->
+      <div class="grey-strip absolute h-16 bg-gray-200 transform rotate-6 z-10"></div>
+      
+      <!-- Orange strip - perfectly aligned to cross in the middle -->
+      <div class="orange-strip absolute h-16 bg-orange-500 transform -rotate-6 z-20">
+        <!-- Text container centered within orange strip -->
+        <div class="flex items-center justify-center h-full">
+          <div class="text-container">
+            <h2 class="text-white text-2xl md:text-5xl font-bold tracking-wide whitespace-nowrap">WHAT WE INCLUDE IN OUR SERVICES</h2>
           </div>
-          <h3 class="text-xl font-bold text-orange-500 mt-4 text-center">{service.title}</h3>
-          <p class="mt-2 text-gray-600 italic text-center font-mono">{service.description}</p>
         </div>
-      ))}
+      </div>
     </div>
   </div>
-</div>
+  
+  <!-- Services content with background -->
+  <div class="services-content relative pb-16 -mt-12"> 
+    <!-- Background image -->
+    <div class="absolute inset-0 z-0">
+      <img src="/main-bg-1.png" alt="Background" class="w-full h-full object-cover">
+    </div>
+    
+    <!-- Service boxes -->
+    <div class="container relative z-10 mx-auto px-4 pt-24">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {services.map((service) => (
+          <div class="service-card bg-white rounded-lg shadow-md p-6 transition-transform hover:scale-105">
+            <div class="service-icon bg-orange-100 text-orange-500 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold">
+              {service.icon}
+            </div>
+            <h3 class="text-xl font-bold mb-3">{service.title}</h3>
+            <p class="text-gray-600">{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
 
 <style>
-  /* Custom curved border shape for service boxes */
-  .rounded-custom {
-    border-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
+  /* Contained strip styling with perfect centering */
+  .strips-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Properly sized and positioned strips */
+  .grey-strip, .orange-strip {
+    width: 100%;
+    left: 0;
+    right: 0;
+    /* Perfect centering for the cross effect */
+    top: 50%;
+    transform-origin: center;
+  }
+  
+  /* Specific positioning for each strip */
+  .grey-strip {
+    transform: translateY(-50%) rotate(6deg);
+  }
+  
+  .orange-strip {
+    transform: translateY(-50%) rotate(-6deg);
+  }
+  
+  /* Center the text within the orange strip */
+  .text-container {
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  /* Ensure strips stay contained */
+  .strips-wrapper {
+    position: relative;
+    overflow: hidden; /* Keep everything contained */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .text-container h2 {
+      font-size: 1.25rem;
+    }
+    
+    /* Adjust positioning for mobile */
+    .services-section {
+      margin-top: 2rem;
+    }
+    
+    /* Mobile strip adjustments */
+    .strips-wrapper {
+      height: 120px; /* Adjust height for mobile */
+    }
   }
 </style>

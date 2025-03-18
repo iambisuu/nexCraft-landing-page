@@ -1,124 +1,47 @@
----
-// Header.astro
-// JavaScript goes here in the frontmatter
-const handleMobileMenu = `
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
+<section class="flex w-full h-[38rem] mt-36 overflow-hidden">
+  <!-- Left section with pattern and overlay -->
+  <div class="relative w-[5%] h-[30rem]  my-auto bg-orange-100">
+    <img src="/hero-banner.png" alt="Left pattern" class="w-full h-full object-cover" />
     
-    if (menuToggle && mobileMenu) {
-      menuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-      });
-    }
-  });
-`;
----
-
-<header class="w-full relative overflow-hidden">
-  <!-- Orange Pattern Background -->
-  <div class="absolute top-[8rem] z-0 flex w-full">
-    <!-- Left Pattern -->
-    <div class="w-1/10 h-[20rem] md:h-[34rem] mb-12">
-      <img src="/hero-banner.png" alt="" class="w-full h-full object-cover" />
-    </div>
-    
-    <!-- Center space for content -->
-    <div class="flex-grow"></div>
-    
-    <!-- Right Pattern -->
-    <div class="w-1/10 h-[18rem] md:h-[27rem] ml-8 flex">
-      <img src="/hero-banner.png" alt="" class="w-full h-full object-cover" />
-      <img src="/hero-banner.png" alt="" class="w-full h-full object-cover hidden sm:block" />
-      <img src="/hero-banner.png" alt="" class="w-full h-full object-cover hidden md:block" />
-      <img src="/hero-banner.png" alt="" class="w-full h-full object-cover hidden md:block" />
-      <img src="/hero-banner.png" alt="" class="w-full h-full object-cover hidden lg:block" />
-      <img src="/hero-banner.png" alt="" class="w-full h-full object-cover hidden lg:block" />
+    <!-- Logo and text overlay - positioned properly -->
+    <div class="absolute top-1/4 left-full transform -translate-x-1/2 w-72">
+      <img src="/LOGO.png" alt="Logo" class="w-16 h-auto mb-2" />
+      <p class="text-xs font-light mt-2">
+        At nexCraft, we craft vibrant and innovative digital products
+        tailored to your needs so that no one has to settle for the same old
+        <span class="text-orange-500">experience</span>.
+      </p>
     </div>
   </div>
   
-  <!-- Content Container -->
-  <div class="container mx-auto px-4 relative z-10 py-8">
-    <!-- Navigation - Kept exactly as original for desktop -->
-    <nav class="flex justify-end items-center absolute z-20 sm:top-[calc(8rem-2rem)] sm:right-[-4.5rem)] top-4 right-4 md:top-[calc(8rem-2rem)] md:right-[-4.5rem]">
-      <!-- Menu Items -->
-      <div class="hidden md:flex space-x-8">
-        <a href="#" class="text-black font-bold text-xl">CONTACT</a>
-        <a href="#" class="text-black font-bold text-xl">ABOUT US</a>
-        <a href="#" class="text-black font-bold text-xl">SOLUTIONS</a>
-      </div>
-      
-      <!-- Mobile Menu Button -->
-      <button class="md:hidden text-black" id="menuToggle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </nav>
-    
-    <!-- Mobile Menu (Hidden by default) -->
-    <div class="md:hidden hidden bg-white p-4 rounded-lg shadow-lg absolute right-4 top-20 z-50" id="mobileMenu">
-      <div class="flex flex-col space-y-4">
-        <a href="#" class="text-black font-bold text-xl">CONTACT</a>
-        <a href="#" class="text-black font-bold text-xl">ABOUT US</a>
-        <a href="#" class="text-black font-bold text-xl">SOLUTIONS</a>
-      </div>
+  <!-- Middle section with large text -->
+  <div class="w-[70%] h-full flex items-center justify-center">
+    <img src="/hero-nexcraft.png" alt="nexCRAFT" class="w-full h-auto max-w-[95%]" />
+  </div>
+  
+  <!-- Right section -->
+  <div class="w-[20%] h-full flex flex-col">
+    <!-- Navigation menu -->
+    <div class="h-[15%] flex items-center justify-end gap-8 pr-6">
+      <a href="/contact" class="font-bold text-sm">CONTACT</a>
+      <a href="/about" class="font-bold text-sm">ABOUT US</a>
+      <a href="/solutions" class="font-bold text-sm">SOLUTIONS</a>
     </div>
     
-    <!-- Mobile Logo and Text (non-overlapping) -->
-    <div class="md:hidden flex items-start mb-8 max-w-xs p-2">
-      <img src="/LOGO.png" alt="V Logo" class="w-12 sm:w-16 mr-2" />
-      <div class="text-black">
-        <p class="text-xs sm:text-sm">At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for old</p>
-      </div>
+    <!-- Right orange pattern -->
+    <div class="h-[70%] w-full">
+      <img src="/right-orange-bg.png" alt="Right pattern" class="w-full h-full object-cover" />
     </div>
     
-    <!-- Main Content and Logo Positioned Together -->
-    <div class="relative">
-      <!-- Logo and Text - Only for desktop, hidden on mobile -->
-      <div class="hidden md:flex absolute top-0 left-8 z-20 items-start max-w-xs p-3">
-        <!-- V Logo -->
-        <img src="/LOGO.png" alt="V Logo" class="w-24 mr-2" />
-        
-        <!-- Text Description -->
-        <div class="text-black text-sm">
-          <p>At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for old</p>
-        </div>
-      </div>
-      
-      <!-- NexCraft Big Logo/Text -->
-      <!-- Small on mobile, exactly as original on desktop -->
-      <div class="block md:hidden flex justify-center">
-        <img src="/hero-nexcraft.png" alt="NEXCRAFT" class="w-full max-w-xs sm:max-w-md" />
-      </div>
-      
-      <!-- Original layout for desktop -->
-      <div class="mt-12 hidden md:block md:w-[60rem] relative">
-        <img src="/hero-nexcraft.png" alt="NEXCRAFT" class="w-full" />
-      </div>
-    </div>
-    
-    <!-- Bottom Buttons -->
-    <!-- Mobile-friendly layout for small screens -->
-    <div class="flex flex-col space-y-2 justify-center items-center mt-6 md:hidden">
-      <a href="#" class="border border-[#F26A36] text-black rounded-full px-3 py-1 flex items-center justify-center text-xs w-36">
-        <span class="mr-1">▼</span> Explore More
+    <!-- Bottom action buttons -->
+    <div class="h-[15%] flex items-center justify-end gap-4 pr-6">
+      <a href="/explore" class="flex items-center gap-2 px-6 py-2 border border-black rounded-full">
+        <span class="transform rotate-180">▼</span>
+        <span>Explore More</span>
       </a>
-      <a href="#" class="bg-black text-[#F26A36] rounded-full px-3 py-1 flex items-center justify-center text-xs w-36">
-        <span class="mr-1">📞</span> BOOK A CALL
-      </a>
-    </div>
-    
-    <!-- Original layout for desktop - Exactly as in the original code -->
-    <div class="hidden md:flex md:justify-end md:space-x-4 md:absolute md:z-20 md:top-[calc(8rem+27rem+8px)] md:right-[-4rem]">
-      <a href="#" class="border border-[#F26A36] text-black rounded-full px-6 py-3 flex items-center">
-        <span class="mr-2">▼</span> Explore More
-      </a>
-      <a href="#" class="bg-black text-[#F26A36] rounded-full px-6 py-3 flex items-center">
-        <span class="mr-2">📞</span> BOOK A CALL
+      <a href="/book" class="px-6 py-2 bg-black text-white rounded-full">
+        BOOK A CALL
       </a>
     </div>
   </div>
-</header>
-
-<script set:html={handleMobileMenu}></script>
+</section>

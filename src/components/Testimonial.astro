@@ -1,5 +1,5 @@
 ---
-// TestimonialSlider.astro
+// TestimonialMarquee.astro
 const testimonials = [
   {
     name: "Qadira",
@@ -13,93 +13,240 @@ const testimonials = [
     name: "Quil and Coin",
     text: "\"Partnering with this team was one of the best decisions we made. They created a sleek, user-friendly website that captures our mission perfectly. Now, registration and payment processes are fully streamlined, allowing our clients to focus on their events while we handle the details behind the scenes. This website has truly elevated our business, making it easier than ever for us to deliver on our promise.\""
   }
-  ,
-  {
-    name: "Quil and Coin",
-    text: "\"Partnering with this team was one of the best decisions we made. They created a sleek, user-friendly website that captures our mission perfectly. Now, registration and payment processes are fully streamlined, allowing our clients to focus on their events while we handle the details behind the scenes. This website has truly elevated our business, making it easier than ever for us to deliver on our promise.\""
-  }
-  ,
-  {
-    name: "Quil and Coin",
-    text: "\"Partnering with this team was one of the best decisions we made. They created a sleek, user-friendly website that captures our mission perfectly. Now, registration and payment processes are fully streamlined, allowing our clients to focus on their events while we handle the details behind the scenes. This website has truly elevated our business, making it easier than ever for us to deliver on our promise.\""
-  }
-  ,
-  {
-    name: "Quil and Coin",
-    text: "\"Partnering with this team was one of the best decisions we made. They created a sleek, user-friendly website that captures our mission perfectly. Now, registration and payment processes are fully streamlined, allowing our clients to focus on their events while we handle the details behind the scenes. This website has truly elevated our business, making it easier than ever for us to deliver on our promise.\""
-  }
 ];
+
+// Duplicate testimonials for continuous scrolling
+const allTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
 ---
 
-<div class="relative w-full h-screen p-16 mt-20  bg-cover bg-center overflow-hidden" style="background-image: url('/bg-2.png');">
+<div class="relative w-full h-screen p-16 mt-20 bg-cover bg-center overflow-hidden" style="background-image: url('/bg-2.png');">
   <div class="mb-8">
     <h1 class="font-black text-5xl uppercase tracking-tight leading-none md:text-6xl">
-      What People <span class="text-[#f4813f]">Say</span> ??
+      What People <span class="text-[#f4813f]">Say</span>
     </h1>
   </div>
   
-  <div id="testimonial-slider" class="flex mt-32 gap-12 w-full overflow-x-auto pb-4 scrollbar-hide">
-    {testimonials.map((testimonial) => (
-      <div class="relative bg-white rounded-3xl p-6 min-w-[300px] max-w-[350px] flex-none shadow-md border border-gray-100">
-        <div class="absolute text-[#f4813f] text-7xl font-serif leading-none top-1 left-3">"</div>
-        <div class="pt-6">
-          <h3 class="text-xl font-bold mb-2">{testimonial.name}</h3>
-          <p class="text-sm leading-relaxed text-gray-800">{testimonial.text}</p>
+  <div class="marquee-container relative mt-32 overflow-hidden">
+    <div id="testimonial-marquee" class="marquee-content flex gap-12">
+      {allTestimonials.map((testimonial) => (
+        <div class="testimonial-card relative bg-white rounded-3xl p-6 min-w-[300px] max-w-[350px] flex-none shadow-md border border-gray-100">
+          <div class="absolute text-[#f4813f] text-7xl font-serif leading-none top-1 left-3">"</div>
+          <div class="pt-6">
+            <h3 class="text-xl font-bold mb-2">{testimonial.name}</h3>
+            <p class="text-sm leading-relaxed text-gray-800">{testimonial.text}</p>
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
   
-  <div class="flex justify-center gap-4 mt-4">
-    <button id="prev-btn" aria-label="Previous testimonial" class="bg-[#f4813f] text-white rounded-full w-10 h-10 flex items-center justify-center text-xl hover:bg-[#e87020] transition-colors">&lt;</button>
-    <button id="next-btn" aria-label="Next testimonial" class="bg-[#f4813f] text-white rounded-full w-10 h-10 flex items-center justify-center text-xl hover:bg-[#e87020] transition-colors">&gt;</button>
+  <div class="flex justify-center gap-4 mt-8">
+    <button id="toggle-mode-btn" aria-label="Toggle auto-scroll mode" class="bg-[#f4813f] text-white rounded-full px-4 py-2 flex items-center justify-center text-sm hover:bg-[#e87020] transition-colors">
+      Auto-Scroll: <span id="mode-status" class="ml-1">ON</span>
+    </button>
   </div>
 </div>
 
 <script>
+  declare global {
+    interface Window {
+      lastScrollY: number;
+      previousScrollY: number;
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.getElementById('testimonial-slider');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
+    const marquee = document.getElementById('testimonial-marquee');
+    const toggleModeBtn = document.getElementById('toggle-mode-btn');
+    const modeStatus = document.getElementById('mode-status');
     
-    let scrollAmount = 0;
-    const scrollStep = 350; // Width of one testimonial box + gap
-    
-    if (slider && nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        scrollAmount += scrollStep;
-        if (scrollAmount > slider.scrollWidth - slider.clientWidth) {
-          scrollAmount = slider.scrollWidth - slider.clientWidth;
-        }
-        slider.scrollTo({
-          left: scrollAmount,
-          behavior: 'smooth'
-        });
-      });
+    // Safely handle null checks
+    if (!marquee || !toggleModeBtn || !modeStatus) {
+      console.error("Required elements not found");
+      return;
     }
     
-    if (slider && prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        scrollAmount -= scrollStep;
-        if (scrollAmount < 0) {
-          scrollAmount = 0;
+    // Scroll variables
+    let isAutoScrollMode = true; // Start with auto-scrolling enabled
+    let scrollPosition = 0;
+    let scrollSpeed = 1; // Default scroll speed (pixels per animation frame)
+    let isScrolling = false;
+    let scrollTimeout: number | null = null;
+    let animationFrame: number | null = null;
+    
+    // Set initial mode
+    updateScrollMode(isAutoScrollMode);
+    
+    // Toggle between auto-scroll and scroll-driven modes
+    toggleModeBtn.addEventListener('click', () => {
+      isAutoScrollMode = !isAutoScrollMode;
+      updateScrollMode(isAutoScrollMode);
+    });
+    
+    function updateScrollMode(autoMode: boolean) {
+      if (autoMode) {
+        // Enable auto scrolling
+        modeStatus!.textContent = "ON";
+        startAutoScroll();
+      } else {
+        // Disable auto scrolling, only scroll with user input
+        modeStatus!.textContent = "OFF";
+        stopAutoScroll();
+      }
+    }
+    
+    function startAutoScroll() {
+      // Cancel any existing animation
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+      
+      // Remove any transform to reset position
+      marquee!.style.transform = "";
+      // Add CSS animation
+      marquee!.style.animation = "marquee 30s linear infinite";
+      
+      // Remove scroll event listeners when in auto mode
+      window.removeEventListener('scroll', handleScroll);
+    }
+    
+    function stopAutoScroll() {
+      // Stop CSS animation
+      marquee!.style.animation = "none";
+      
+      // Add scroll event listeners for scroll-driven mode
+      window.addEventListener('scroll', handleScroll);
+      
+      // Initialize position
+      scrollPosition = 0;
+      marquee!.style.transform = `translateX(0px)`;
+    }
+    
+    // Handle scroll events for scroll-driven mode
+    function handleScroll() {
+      if (isAutoScrollMode) return;
+      
+      const scrollDelta = window.scrollY - (window.lastScrollY || 0);
+      window.lastScrollY = window.scrollY;
+      
+      // Determine scroll direction and adjust marquee position
+      scrollPosition -= scrollDelta * 2; // Amplify scroll effect
+      
+      // Check if we need to reset the position for infinite scroll effect
+      const marqueeWidth = marquee!.scrollWidth / 2;
+      if (Math.abs(scrollPosition) > marqueeWidth) {
+        scrollPosition = scrollPosition % marqueeWidth;
+      }
+      
+      // Apply the transform
+      marquee!.style.transform = `translateX(${scrollPosition}px)`;
+      
+      // Track scrolling state for inertia
+      isScrolling = true;
+      
+      // Clear existing timeout
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      
+      // Set timeout to detect when scrolling stops
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+        
+        // Optional: Add inertia after scrolling stops
+        if (!isAutoScrollMode) {
+          applyScrollInertia();
         }
-        slider.scrollTo({
-          left: scrollAmount,
-          behavior: 'smooth'
-        });
-      });
+      }, 150) as unknown as number;
+    }
+    
+    // Add inertia effect after user stops scrolling
+    function applyScrollInertia() {
+      if (isAutoScrollMode || isScrolling) return;
+      
+      // Get the last scroll delta to determine direction and speed
+      const lastScrollDelta = window.scrollY - (window.previousScrollY || window.scrollY);
+      window.previousScrollY = window.scrollY;
+      
+      // Calculate inertia based on last scroll speed
+      let inertia = Math.sign(lastScrollDelta) * Math.min(Math.abs(lastScrollDelta * 0.5), 10);
+      let frameCount = 0;
+      
+      // Apply gradual slowdown
+      function applyInertiaFrame() {
+        frameCount++;
+        
+        if (Math.abs(inertia) > 0.1 && frameCount < 60) {
+          scrollPosition -= inertia;
+          
+          // Check boundaries for infinite scroll
+          const marqueeWidth = marquee!.scrollWidth / 2;
+          if (Math.abs(scrollPosition) > marqueeWidth) {
+            scrollPosition = scrollPosition % marqueeWidth;
+          }
+          
+          // Apply the transform
+          marquee!.style.transform = `translateX(${scrollPosition}px)`;
+          
+          // Reduce inertia gradually
+          inertia *= 0.95;
+          
+          // Continue animation
+          animationFrame = requestAnimationFrame(applyInertiaFrame);
+        }
+      }
+      
+      // Start inertia animation
+      if (Math.abs(lastScrollDelta) > 5) {
+        if (animationFrame) {
+          cancelAnimationFrame(animationFrame);
+        }
+        animationFrame = requestAnimationFrame(applyInertiaFrame);
+      }
+    }
+    
+    // Initialize
+    if (isAutoScrollMode) {
+      startAutoScroll();
+    } else {
+      stopAutoScroll();
+    }
+    
+    // TypeScript declarations for window properties
+    declare global {
+      interface Window {
+        lastScrollY: number;
+        previousScrollY: number;
+      }
     }
   });
 </script>
 
 <style>
-  /* This adds the scrollbar-hide utility that isn't in core Tailwind */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
   }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  
+  .marquee-content {
+    display: flex;
+    gap: 3rem;
+    will-change: transform;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%); /* Move by half the content to create seamless loop */
+    }
+  }
+  
+  /* For responsive design */
+  @media (max-width: 768px) {
+    .marquee-content {
+      gap: 1.5rem;
+    }
   }
 </style>

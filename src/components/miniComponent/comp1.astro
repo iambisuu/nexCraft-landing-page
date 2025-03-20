@@ -94,9 +94,8 @@ const {
             <div class="animated-line"></div>
           </div>
           
-          <!-- Concept Text with backdrop --> 
-          <div class="concept-container relative overflow-visible mb-8">
-            <div class="concept-backdrop absolute"></div>
+          <!-- Concept Text (removed backdrop) --> 
+          <div class="concept-container relative overflow-visible">
             <div 
               id="concept-text-display"
               class="font-black leading-none tracking-tight concept-text transition-all relative z-10"
@@ -107,7 +106,7 @@ const {
           </div>
 
           <!-- Accent Text with stroke effect -->
-          <div class="accent-container relative">
+          <div class="accent-container relative mb-">
             <p 
               id="accent-text-display"
               class="font-cursive text-[#FC6403] accent-text transition-all relative z-10"
@@ -144,9 +143,12 @@ const {
     ))}
   </div>
   
-  <!-- Progress indicator -->
+  <!-- Progress indicator with orange line that fills as you scroll -->
   <div class="progress-bar">
-    <div class="progress-line"></div>
+    <div class="progress-line-container">
+      <div class="progress-line-bg"></div>
+      <div class="progress-line-fill"></div>
+    </div>
     <div class="progress-dots">
       {sections.map((_, index) => (
         <div class="progress-dot" data-index={index}></div>
@@ -162,7 +164,7 @@ const {
 
   .concept-discovery-container {
     position: relative;
-    height: calc(120vh * 7); /* Increased height for each section */
+    height: calc(100vh * 7 * 1.5); /* Adjusted height calculation */
   }
 
   .sticky-panel {
@@ -195,21 +197,6 @@ const {
   
   .active .animated-line {
     width: 120px;
-  }
-  
-  .concept-backdrop {
-    top: -10%;
-    left: -5%;
-    right: -5%;
-    bottom: -10%;
-    background-color: rgba(252, 100, 3, 0.03);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  
-  .active .concept-backdrop {
-    transform: scaleX(1);
   }
   
   .accent-decoration {
@@ -251,7 +238,7 @@ const {
   }
 
   .scroll-trigger {
-    height: 120vh; /* Increased height */
+    height: calc(100vh * 1.5); /* Adjusted trigger height */
     width: 100%;
     position: relative;
   }
@@ -267,14 +254,30 @@ const {
     z-index: 20;
   }
   
-  .progress-line {
+  .progress-line-container {
     position: absolute;
     width: 2px;
-    background-color: rgba(0, 0, 0, 0.1);
     left: 50%;
     top: 0;
     bottom: 0;
     transform: translateX(-50%);
+    overflow: hidden;
+  }
+  
+  .progress-line-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .progress-line-fill {
+    position: absolute;
+    width: 100%;
+    height: 0%;
+    bottom: 0;
+    background-color: #FC6403;
+    transition: height 0.3s ease;
   }
   
   .progress-dots {
@@ -323,6 +326,7 @@ const {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.concept-discovery-container');
     const scrollTriggers = document.querySelectorAll('.scroll-trigger');
     const conceptTextDisplay = document.getElementById('concept-text-display');
     const accentTextDisplay = document.getElementById('accent-text-display');
@@ -330,6 +334,7 @@ const {
     const descriptionDisplay = document.getElementById('description-display');
     const currentNumber = document.getElementById('current-number');
     const progressDots = document.querySelectorAll('.progress-dot');
+    const progressLineFill = document.querySelector('.progress-line-fill');
     const displayContent = document.querySelector('.display-content');
     
     let currentIndex = 0;
@@ -338,6 +343,20 @@ const {
     // Active initial state
     displayContent?.classList.add('active');
     progressDots[0]?.classList.add('active');
+    
+    // Update progress line based on visible section rather than scroll position
+    function updateProgressLine() {
+      const totalSections = scrollTriggers.length;
+      if (totalSections === 0) return;
+      
+      const progress = (currentIndex) / (totalSections - 1);
+      if (progressLineFill) {
+        (progressLineFill as HTMLElement).style.height = `${progress * 100}%`;
+      }
+    }
+    
+    // Initial progress line update
+    updateProgressLine();
     
     // Create intersection observer
     const observer = new IntersectionObserver((entries) => {
@@ -365,6 +384,9 @@ const {
               updateDisplay(sectionData, index > currentIndex ? 'down' : 'up');
               currentIndex = index;
               
+              // Update progress line
+              updateProgressLine();
+              
               // Add active state back after content change
               setTimeout(() => {
                 displayContent?.classList.add('active');
@@ -375,7 +397,7 @@ const {
         }
       });
     }, {
-      threshold: 0.3 // Trigger when 30% visible
+      threshold: 0.5 // Increase threshold to ensure better visibility
     });
     
     // Observe each trigger
@@ -392,7 +414,7 @@ const {
           if (targetTrigger) {
             const targetTop = targetTrigger.offsetTop;
             window.scrollTo({
-              top: targetTop + window.innerHeight * 0.3,
+              top: targetTop + window.innerHeight * 0.5,
               behavior: 'smooth'
             });
           }

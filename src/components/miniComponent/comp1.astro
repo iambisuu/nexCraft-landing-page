@@ -1,59 +1,156 @@
 ---
 interface Props {
-  number: string;
-  conceptText: string;
-  conceptSize?: string; // Accepts values like "80vh", "100px", etc.
-  accentText?: string;
-  accentTextSize?: string; // Accepts values like "40vh", "50px", etc.
-  heading: string;
-  description: string;
+  sections: {
+    number: string;
+    conceptText: string;
+    conceptSize?: string;
+    accentText: string;
+    accentTextSize?: string;
+    heading: string;
+    description: string;
+  }[];
 }
 
 const { 
-  number = "01",
-  conceptText = "CONCEPT",
-  conceptSize = "100vh", // Default desktop size
-  accentText = "Discovery",
-  accentTextSize = "50vh", // Default accent text size
-  heading = "Heading",
-  description = "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+  sections = [
+    {
+      number: "01",
+      conceptText: "CONCEPT",
+      conceptSize: "16vh",
+      accentText: "Discovery",
+      accentTextSize: "15vh",
+      heading: "Heading",
+      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+    },
+    {
+      number: "02",
+      conceptText: "CONTENT",
+      conceptSize: "16vh",
+      accentText: "Content",
+      accentTextSize: "15vh",
+      heading: "Heading",
+      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+    },
+    {
+      number: "03",
+      conceptText: "STRUCTURE",
+      conceptSize: "13vh",
+      accentText: "Structure",
+      accentTextSize: "15vh",
+      heading: "Heading",
+      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+    },
+    {
+      number: "04",
+      conceptText: "VISUAL",
+      conceptSize: "16vh",
+      accentText: "Visual",
+      accentTextSize: "15vh",
+      heading: "Heading",
+      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+    },
+    {
+      number: "05",
+      conceptText: "CODE",
+      conceptSize: "16vh",
+      accentText: "Code",
+      accentTextSize: "15vh",
+      heading: "Heading",
+      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+    },
+    {
+      number: "06",
+      conceptText: "FUNCTION",
+      conceptSize: "16vh",
+      accentText: "Function",
+      accentTextSize: "15vh",
+      heading: "Heading",
+      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+    },
+    {
+      number: "07",
+      conceptText: "PROJECT",
+      conceptSize: "16vh",
+      accentText: "Project",
+      accentTextSize: "15vh",
+      heading: "Heading",
+      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
+    }
+  ]
 } = Astro.props;
 ---
 
-<div class="pt-6 sm:pt-8 border-t border-gray-200 max-sm:px-4">
-  <div class="flex flex-col md:flex-row items-start gap-4 font-sans w-full pb-10 sm:pb-16 md:pb-20">
-    
-    <!-- Number -->
-    <div class="text-lg sm:text-xl text-gray-800 font-medium w-full md:w-[5%] mb-2 md:mb-0">
-      {number}.
-    </div>
+<div class="concept-discovery-container">
+  <!-- Fixed position display panel that shows current content -->
+  <div class="sticky-panel">
+    <div class="display-content pt-20 sm:pt-24 pb-20 sm:pb-24 max-sm:px-4">
+      <div class="flex flex-col md:flex-row items-start gap-8 font-sans w-full max-w-7xl mx-auto">
+        
+        <!-- Left Content: Number + Concept Text + Accent Text -->
+        <div class="relative w-full md:w-[60%] flex flex-col">
+          <!-- Number with animated line -->
+          <div class="number-container flex items-center gap-4 mb-6">
+            <div id="current-number" class="text-2xl sm:text-3xl text-gray-800 font-medium transition-all">01.</div>
+            <div class="animated-line"></div>
+          </div>
+          
+          <!-- Concept Text with backdrop --> 
+          <div class="concept-container relative overflow-visible mb-8">
+            <div class="concept-backdrop absolute"></div>
+            <div 
+              id="concept-text-display"
+              class="font-black leading-none tracking-tight concept-text transition-all relative z-10"
+              style={`font-size: ${sections[0].conceptSize};`} 
+            >
+              {sections[0].conceptText}
+            </div>
+          </div>
 
-    <!-- Concept Text and Accent Text -->
-    <div class="relative w-full md:w-[50%] px-2 sm:px-4 mb-8 md:mb-0">
-      <div 
-        class="font-black leading-none tracking-tight concept-text"
-        style={`font-size: ${conceptSize};`} 
-      >
-        {conceptText}
-      </div>
-      <div class="relative md:absolute mt-4 md:mt-0 md:-bottom-20 md:left-20 w-full sm:w-[80%] md:w-[60%]">
-        <p 
-          class="font-cursive text-[#FC6403] accent-text"
-          style={`font-size: ${accentTextSize};`}
-        >
-          {accentText}
-        </p>
+          <!-- Accent Text with stroke effect -->
+          <div class="accent-container relative">
+            <p 
+              id="accent-text-display"
+              class="font-cursive text-[#FC6403] accent-text transition-all relative z-10"
+              style={`font-size: ${sections[0].accentTextSize};`}
+            >
+              {sections[0].accentText}
+            </p>
+            <div class="accent-decoration"></div>
+          </div>
+        </div>
+
+        <!-- Right Content: Heading + Description -->
+        <div class="w-full md:w-[40%] pt-12 md:pt-20">
+          <div class="content-wrapper">
+            <h2 id="heading-display" class="text-2xl sm:text-3xl font-bold mb-6 transition-all">
+              {sections[0].heading}
+            </h2>
+            <div class="separator mb-8"></div>
+            <p id="description-display" class="text-base sm:text-lg leading-relaxed text-gray-600 transition-all">
+              {sections[0].description}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
 
-    <!-- Text Content -->
-    <div class="w-full md:w-[45%] pt-0 md:pt-8">
-      <h2 class="text-xl sm:text-2xl font-semibold mb-2">
-        {heading}
-      </h2>
-      <p class="text-sm sm:text-base leading-relaxed text-gray-600 ">
-        {description}
-      </p>
+  <!-- Hidden scroll triggers with progress indicators -->
+  <div class="scroll-triggers">
+    {sections.map((section, index) => (
+      <div class="scroll-trigger" data-index={index} data-section={JSON.stringify(section)}>
+        <div class="scroll-indicator"></div>
+      </div>
+    ))}
+  </div>
+  
+  <!-- Progress indicator -->
+  <div class="progress-bar">
+    <div class="progress-line"></div>
+    <div class="progress-dots">
+      {sections.map((_, index) => (
+        <div class="progress-dot" data-index={index}></div>
+      ))}
     </div>
   </div>
 </div>
@@ -63,13 +160,337 @@ const {
     font-family: 'Brush Script MT', cursive, serif;
   }
 
+  .concept-discovery-container {
+    position: relative;
+    height: calc(120vh * 7); /* Increased height for each section */
+  }
+
+  .sticky-panel {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 10;
+    background-color: #fff;
+    overflow: hidden;
+  }
+  
+  .display-content {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .animated-line {
+    height: 2px;
+    background: linear-gradient(90deg, #FC6403, transparent);
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .active .animated-line {
+    width: 120px;
+  }
+  
+  .concept-backdrop {
+    top: -10%;
+    left: -5%;
+    right: -5%;
+    bottom: -10%;
+    background-color: rgba(252, 100, 3, 0.03);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .active .concept-backdrop {
+    transform: scaleX(1);
+  }
+  
+  .accent-decoration {
+    position: absolute;
+    height: 8px;
+    background-color: rgba(252, 100, 3, 0.1);
+    bottom: 25%;
+    left: 5%;
+    right: 30%;
+    z-index: 1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  }
+  
+  .active .accent-decoration {
+    transform: scaleX(1);
+  }
+  
+  .separator {
+    width: 60px;
+    height: 4px;
+    background-color: #FC6403;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+  }
+  
+  .active .separator {
+    transform: scaleX(1);
+  }
+
+  .scroll-triggers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+  }
+
+  .scroll-trigger {
+    height: 120vh; /* Increased height */
+    width: 100%;
+    position: relative;
+  }
+
+  .progress-bar {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+  }
+  
+  .progress-line {
+    position: absolute;
+    width: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+  
+  .progress-dots {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .progress-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .progress-dot.active {
+    background-color: #FC6403;
+    border-color: #FC6403;
+    transform: scale(1.3);
+  }
+
+  .transition-all {
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   /* Mobile Fallback Size */
   @media (max-width: 768px) {
     .concept-text {
-      font-size: 7vh !important; /* Adjust for smaller screens */
+      font-size: 12vh !important; /* Increased for better visibility */
     }
     .accent-text {
-      font-size: 6vh !important; /* Adjust accent text for small screens */
+      font-size: 10vh !important; /* Increased for better visibility */
+    }
+    .progress-bar {
+      right: 20px;
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollTriggers = document.querySelectorAll('.scroll-trigger');
+    const conceptTextDisplay = document.getElementById('concept-text-display');
+    const accentTextDisplay = document.getElementById('accent-text-display');
+    const headingDisplay = document.getElementById('heading-display');
+    const descriptionDisplay = document.getElementById('description-display');
+    const currentNumber = document.getElementById('current-number');
+    const progressDots = document.querySelectorAll('.progress-dot');
+    const displayContent = document.querySelector('.display-content');
+    
+    let currentIndex = 0;
+    let animating = false;
+    
+    // Active initial state
+    displayContent?.classList.add('active');
+    progressDots[0]?.classList.add('active');
+    
+    // Create intersection observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !animating) {
+          const index = parseInt((entry.target as HTMLElement).dataset.index || '0');
+          if (index !== currentIndex) {
+            animating = true;
+            
+            // Update active dot
+            progressDots.forEach((dot, i) => {
+              if (i === index) {
+                dot.classList.add('active');
+              } else {
+                dot.classList.remove('active');
+              }
+            });
+            
+            // Remove active state for animation reset
+            displayContent?.classList.remove('active');
+            
+            const sectionData = (entry.target as HTMLElement).dataset.section ? JSON.parse((entry.target as HTMLElement).dataset.section as string) : null;
+            
+            setTimeout(() => {
+              updateDisplay(sectionData, index > currentIndex ? 'down' : 'up');
+              currentIndex = index;
+              
+              // Add active state back after content change
+              setTimeout(() => {
+                displayContent?.classList.add('active');
+                animating = false;
+              }, 100);
+            }, 300);
+          }
+        }
+      });
+    }, {
+      threshold: 0.3 // Trigger when 30% visible
+    });
+    
+    // Observe each trigger
+    scrollTriggers.forEach(trigger => {
+      observer.observe(trigger);
+    });
+    
+    // Add click handler for progress dots
+    progressDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        if (!animating && index !== currentIndex) {
+          // Scroll to the corresponding section
+          const targetTrigger = scrollTriggers[index] as HTMLElement;
+          if (targetTrigger) {
+            const targetTop = targetTrigger.offsetTop;
+            window.scrollTo({
+              top: targetTop + window.innerHeight * 0.3,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+    
+    // Update the display with animation
+    function updateDisplay(sectionData: { number: string; conceptText: string; conceptSize?: string; accentText: string; accentTextSize?: string; heading: string; description: string; }, direction: 'up' | 'down') {
+      // Set up animation direction
+      const incomingTransform = direction === 'down' ? 'translateY(40px)' : 'translateY(-40px)';
+      const outgoingTransform = direction === 'down' ? 'translateY(-40px)' : 'translateY(40px)';
+      
+      // Animate out current content
+      if (conceptTextDisplay) {
+        conceptTextDisplay.style.opacity = '0';
+        conceptTextDisplay.style.transform = outgoingTransform;
+      }
+      if (accentTextDisplay) {
+        accentTextDisplay.style.opacity = '0';
+        accentTextDisplay.style.transform = outgoingTransform;
+      }
+      if (headingDisplay) {
+        headingDisplay.style.opacity = '0';
+        headingDisplay.style.transform = outgoingTransform;
+      }
+      if (descriptionDisplay) {
+        descriptionDisplay.style.opacity = '0';
+        descriptionDisplay.style.transform = outgoingTransform;
+      }
+      if (currentNumber) {
+        currentNumber.style.opacity = '0';
+      }
+      
+      // Change content after fade-out
+      setTimeout(() => {
+        // Update sizes and prepare incoming animation
+        if (conceptTextDisplay) {
+          conceptTextDisplay.style.fontSize = sectionData.conceptSize || '16vh';
+        }
+        if (accentTextDisplay) {
+          accentTextDisplay.style.fontSize = sectionData.accentTextSize || '15vh';
+        }
+        
+        // Set new text content
+        if (conceptTextDisplay) {
+          conceptTextDisplay.textContent = sectionData.conceptText;
+        }
+        if (accentTextDisplay) {
+          accentTextDisplay.textContent = sectionData.accentText;
+        }
+        if (headingDisplay) {
+          headingDisplay.textContent = sectionData.heading;
+        }
+        if (descriptionDisplay) {
+          descriptionDisplay.textContent = sectionData.description;
+        }
+        if (currentNumber) {
+          currentNumber.textContent = `${sectionData.number}.`;
+        }
+        
+        // Position incoming content
+        if (conceptTextDisplay) {
+          conceptTextDisplay.style.transform = incomingTransform;
+        }
+        if (accentTextDisplay) {
+          accentTextDisplay.style.transform = incomingTransform;
+        }
+        if (headingDisplay) {
+          headingDisplay.style.transform = incomingTransform;
+        }
+        if (descriptionDisplay) {
+          descriptionDisplay.style.transform = incomingTransform;
+        }
+        
+        // Trigger animation in
+        setTimeout(() => {
+          if (conceptTextDisplay) {
+            conceptTextDisplay.style.opacity = '1';
+            conceptTextDisplay.style.transform = 'translateY(0)';
+          }
+          if (accentTextDisplay) {
+            accentTextDisplay.style.opacity = '1';
+            accentTextDisplay.style.transform = 'translateY(0)';
+          }
+          if (headingDisplay) {
+            headingDisplay.style.opacity = '1';
+            headingDisplay.style.transform = 'translateY(0)';
+          }
+          if (descriptionDisplay) {
+            descriptionDisplay.style.opacity = '1';
+            descriptionDisplay.style.transform = 'translateY(0)';
+          }
+          if (currentNumber) {
+            currentNumber.style.opacity = '1';
+          }
+        }, 50);
+      }, 300);
+    }
+  });
+</script>

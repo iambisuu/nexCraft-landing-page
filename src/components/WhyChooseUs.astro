@@ -1,76 +1,77 @@
 ---
-import ConceptDiscovery from './miniComponent/comp1.astro';
+import Comp1 from "./miniComponent/comp1.astro";
+
+const sections = [
+  {
+    number: "01",
+    conceptText: "CONCEPT",
+    conceptSize: "16vh",
+    accentText: "Discovery",
+    accentTextSize: "15vh",
+    heading: "Ideate & Explore",
+    description: "At nexCraft, we begin by exploring innovative concepts that push the boundaries of digital experiences, ensuring your project stands out from the ordinary."
+  },
+  {
+    number: "02",
+    conceptText: "CONTENT",
+    conceptSize: "16vh",
+    accentText: "Content",
+    accentTextSize: "15vh",
+    heading: "Craft & Create",
+    description: "Our team develops compelling content that resonates with your audience, combining strategy and creativity to communicate your brand's unique story."
+  },
+  {
+    number: "03",
+    conceptText: "STRUCTURE",
+    conceptSize: "13vh",
+    accentText: "Structure",
+    accentTextSize: "15vh",
+    heading: "Build & Organize",
+    description: "We establish robust information architecture and user flows that provide the foundation for exceptional digital experiences and intuitive navigation."
+  },
+  {
+    number: "04",
+    conceptText: "VISUAL",
+    conceptSize: "16vh",
+    accentText: "Visual",
+    accentTextSize: "15vh",
+    heading: "Design & Delight",
+    description: "Our visual designs bring concepts to life with stunning aesthetics that capture attention while enhancing usability and accessibility."
+  },
+  {
+    number: "05",
+    conceptText: "CODE",
+    conceptSize: "16vh",
+    accentText: "Code",
+    accentTextSize: "15vh",
+    heading: "Develop & Deploy",
+    description: "We transform designs into functioning digital products using clean, efficient code that ensures performance, reliability, and scalability."
+  },
+  {
+    number: "06",
+    conceptText: "FUNCTION",
+    conceptSize: "16vh",
+    accentText: "Function",
+    accentTextSize: "15vh",
+    heading: "Optimize & Enhance",
+    description: "Every feature we build serves a purpose, combining form and function to create digital products that not only look great but perform flawlessly."
+  },
+  {
+    number: "07",
+    conceptText: "PROJECT",
+    conceptSize: "16vh",
+    accentText: "Project",
+    accentTextSize: "15vh",
+    heading: "Launch & Scale",
+    description: "From concept to completion, we manage your project with precision, delivering exceptional results that exceed expectations and drive business growth."
+  }
+];
 ---
 
-<div>
-  <ConceptDiscovery 
-    number="01"
-    conceptText="CONCEPT"
-    conceptSize="16vh"
-    accentTextSize="15vh"
-    accentText="Discovery"
-    heading="Heading"
-    description="At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-  />
-
-  <ConceptDiscovery 
-    number="02"
-    conceptText="CONTENT"
-      conceptSize="16vh"
-    accentTextSize="15vh"
-    accentText="Content"
-    heading="Heading"
-    description="At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-  />
-
-  <ConceptDiscovery 
-    number="03"
-    conceptText="STRUCTURE"
-    conceptSize="13vh"
-    accentTextSize="15vh"
-    accentText="Structure"
-
-    heading="Heading"
-    description="At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-  />
-
-  <ConceptDiscovery 
-    number="04"
-    conceptText="VISUAL"
-    conceptSize="16vh"
-    accentTextSize="15vh"
-    accentText="Visual"
-    heading="Heading"
-    description="At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-  />
-
-  <ConceptDiscovery 
-    number="05"
-    conceptText="CODE"
-    conceptSize="16vh"
-    accentTextSize="15vh"
-    accentText="Code"
-    heading="Heading"
-    description="At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-  />
-
-  <ConceptDiscovery 
-    number="06"
-    conceptText="FUNCTION"
-    conceptSize="16vh"
-    accentTextSize="15vh"
-    accentText="Function"
-    heading="Heading"
-    description="At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-  />
-
-  <ConceptDiscovery 
-    number="07"
-    conceptText="PROJECT"
-    conceptSize="16vh"
-    accentTextSize="15vh"
-    accentText="Project"
-    heading="Heading"
-    description="At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-  />
+<div class="min-h-screen">
+  <!-- Other content here -->
+  
+  <Comp1 sections={sections} />
+  
+  <!-- Other content here -->
 </div>

@@ -2,7 +2,7 @@
 // KeyMetrics.astro
 ---
 
-<section class="py-16 relative">
+<section class="key-metrics py-16 relative">
   <!-- Background Image -->
   <div class="absolute inset-0 z-0">
     <img src="/orange-bg.png" alt="Orange background" class="w-full h-full object-cover" />
@@ -10,8 +10,8 @@
   
   <div class="container mx-auto px-4 relative z-10">
     <!-- Header -->
-    <div class="mb-12">
-      <h2 class="text-[#F26A36] text-5xl md:text-6xl font-bold uppercase">
+    <div class="mb-12 md:mb-16">
+      <h2 class="text-[#F26A36] text-5xl md:text-6xl font-bold uppercase leading-tight">
         KEY<br/>METRICS
       </h2>
     </div>
@@ -19,82 +19,125 @@
     <!-- Metrics Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <!-- 300+ Projects -->
-      <div class="bg-white rounded-3xl p-6 shadow-md">
-        <div class="mb-2">
+      <div class="metric-card bg-white rounded-3xl p-6 md:p-8 shadow-md">
+        <div class="mb-1">
           <span class="text-black text-5xl md:text-6xl font-bold">300+</span>
         </div>
         <div class="mb-4">
           <span class="text-[#F26A36] text-xl md:text-2xl font-medium">Successful Projects</span>
         </div>
-        <p class="text-gray-800">
+        <p class="text-gray-800 text-sm md:text-base">
           Demonstrates our extensive experience and consistent delivery of high-quality work.
         </p>
       </div>
       
       <!-- 99% Satisfaction -->
-      <div class="bg-white rounded-3xl p-6 shadow-md">
-        <div class="mb-2">
+      <div class="metric-card bg-white rounded-3xl p-6 md:p-8 shadow-md">
+        <div class="mb-1">
           <span class="text-black text-5xl md:text-6xl font-bold">99%</span>
         </div>
         <div class="mb-4">
           <span class="text-[#F26A36] text-xl md:text-2xl font-medium">Client Satisfaction Rate</span>
         </div>
-        <p class="text-gray-800">
-          Demonstrates our extensive experience and consistent delivery of high-quality work.
-        </p>
-      </div>
-      
-      <!-- 100+ Clients -->
-      <div class="bg-white rounded-3xl p-6 shadow-md">
-        <div class="mb-2">
-          <span class="text-black text-5xl md:text-6xl font-bold">100+</span>
-        </div>
-        <div class="mb-4">
-          <span class="text-[#F26A36] text-xl md:text-2xl font-medium">Satisfied Clients</span>
-        </div>
-        <p class="text-gray-800">
+        <p class="text-gray-800 text-sm md:text-base">
           Demonstrates our extensive experience and consistent delivery of high-quality work.
         </p>
       </div>
       
       <!-- 10+ Years -->
-      <div class="bg-white rounded-3xl p-6 shadow-md">
-        <div class="mb-2">
+      <div class="metric-card bg-white rounded-3xl p-6 md:p-8 shadow-md">
+        <div class="mb-1">
           <span class="text-black text-5xl md:text-6xl font-bold">10+</span>
         </div>
         <div class="mb-4">
           <span class="text-[#F26A36] text-xl md:text-2xl font-medium">Years of Experience</span>
         </div>
-        <p class="text-gray-800">
+        <p class="text-gray-800 text-sm md:text-base">
+          Demonstrates our extensive experience and consistent delivery of high-quality work.
+        </p>
+      </div>
+      
+      <!-- 100+ Clients -->
+      <div class="metric-card bg-white rounded-3xl p-6 md:p-8 shadow-md">
+        <div class="mb-1">
+          <span class="text-black text-5xl md:text-6xl font-bold">100+</span>
+        </div>
+        <div class="mb-4">
+          <span class="text-[#F26A36] text-xl md:text-2xl font-medium">Satisfied Clients</span>
+        </div>
+        <p class="text-gray-800 text-sm md:text-base">
           Demonstrates our extensive experience and consistent delivery of high-quality work.
         </p>
       </div>
       
       <!-- 50+ Professionals -->
-      <div class="bg-white rounded-3xl p-6 shadow-md">
-        <div class="mb-2">
+      <div class="metric-card bg-white rounded-3xl p-6 md:p-8 shadow-md">
+        <div class="mb-1">
           <span class="text-black text-5xl md:text-6xl font-bold">50+</span>
         </div>
         <div class="mb-4">
           <span class="text-[#F26A36] text-xl md:text-2xl font-medium">Skilled Professionals</span>
         </div>
-        <p class="text-gray-800">
+        <p class="text-gray-800 text-sm md:text-base">
           Demonstrates our extensive experience and consistent delivery of high-quality work.
         </p>
       </div>
       
       <!-- 45% Increase -->
-      <div class="bg-white rounded-3xl p-6 shadow-md">
-        <div class="mb-2">
+      <div class="metric-card bg-white rounded-3xl p-6 md:p-8 shadow-md">
+        <div class="mb-1">
           <span class="text-black text-5xl md:text-6xl font-bold">45%</span>
         </div>
         <div class="mb-4">
           <span class="text-[#F26A36] text-xl md:text-2xl font-medium">Average Increase in Sales</span>
         </div>
-        <p class="text-gray-800">
+        <p class="text-gray-800 text-sm md:text-base">
           Demonstrates our extensive experience and consistent delivery of high-quality work.
         </p>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .key-metrics {
+    overflow: hidden;
+  }
+  
+  .metric-card {
+    border-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      max-width: 1200px;
+    }
+  }
+  
+  /* Fixed card layout to match the image */
+  @media (min-width: 992px) {
+    .grid-cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* To match the exact layout in the image */
+    .grid {
+      grid-template-areas:
+        "a b c"
+        "d e f";
+    }
+    
+    .grid > div:nth-child(1) { grid-area: a; }
+    .grid > div:nth-child(2) { grid-area: d; }
+    .grid > div:nth-child(3) { grid-area: e; }
+    .grid > div:nth-child(4) { grid-area: c; }
+    .grid > div:nth-child(5) { grid-area: b; }
+    .grid > div:nth-child(6) { grid-area: f; }
+  }
+</style>

@@ -3,54 +3,187 @@
 ---
 
 <div class="relative w-full min-h-screen overflow-hidden">
-    <!-- Background images -->
-    <div class="absolute inset-0 flex justify-between items-stretch">
-      <img src="/bg-left.png" alt="Left Background" class="h-3/4 w-auto mt-20 object-cover object-left" />
-      <img src="/bg-right.png" alt="Right Background" class="h- w-auto mt-12 object-cover object-right" />
+  <!-- Background images with animation classes -->
+  <div class="absolute inset-0 flex justify-between items-stretch">
+    <img 
+      src="/bg-left.png" 
+      alt="Left Background" 
+      class="bg-left h-3/4 w-auto mt-20 object-cover object-left opacity-0 translate-x-[-100%] rotate-[-15deg]" 
+    />
+    <img 
+      src="/bg-right.png" 
+      alt="Right Background" 
+      class="bg-right h-3/4 w-auto mt-12 object-cover object-right opacity-0 translate-x-[100%] rotate-[15deg]" 
+    />
+  </div>
+  
+  <!-- Content overlay -->
+  <div class="absolute inset-0 flex flex-col items-center justify-center p-4">
+    <h1 class="stack-title text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-10 md:mb-16 opacity-0 translate-y-8">
+      Our Stack
+    </h1>
+    
+    <!-- Top row -->
+    <div class="w-full max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12">
+      <div class="stack-card bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200 transition-all duration-300 opacity-0 translate-y-8">
+        <img src="/stack/1.png" alt="Figma" class="h-12 md:h-16 w-auto mb-4 md:mb-6 transition-transform duration-300" />
+        <p class="text-xl md:text-2xl font-bold">Figma</p>
+      </div>
+      <div class="stack-card bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200 transition-all duration-300 opacity-0 translate-y-8" style="transition-delay: 100ms;">
+        <img src="/stack/2.png" alt="Notion" class="h-12 md:h-16 w-auto mb-4 md:mb-6 transition-transform duration-300" />
+        <p class="text-xl md:text-2xl font-bold">Notion</p>
+      </div>
+      <div class="stack-card bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200 transition-all duration-300 opacity-0 translate-y-8" style="transition-delay: 200ms;">
+        <img src="/stack/3.png" alt="Zapier" class="h-12 md:h-16 w-auto mb-4 md:mb-6 transition-transform duration-300" />
+        <p class="text-xl md:text-2xl font-bold">Zapier</p>
+      </div>
+      <div class="stack-card bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200 transition-all duration-300 opacity-0 translate-y-8" style="transition-delay: 300ms;">
+        <img src="/stack/4.png" alt="Framer" class="h-12 md:h-16 w-auto mb-4 md:mb-6 transition-transform duration-300" />
+        <p class="text-xl md:text-2xl font-bold">Framer</p>
+      </div>
     </div>
     
-    <!-- Content overlay -->
-    <div class="absolute inset-0 flex flex-col items-center justify-center p-4">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-10 md:mb-16">Our Stack</h1>
-      
-      <!-- Top row -->
-      <div class="w-full max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12">
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200">
-          <img src="/stack/1.png" alt="Figma" class="h-12 md:h-16 w-auto mb-4 md:mb-6" />
-          <p class="text-xl md:text-2xl font-bold">Figma</p>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200">
-          <img src="/stack/2.png" alt="Notion" class="h-12 md:h-16 w-auto mb-4 md:mb-6" />
-          <p class="text-xl md:text-2xl font-bold">Notion</p>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200">
-          <img src="/stack/3.png" alt="Zapier" class="h-12 md:h-16 w-auto mb-4 md:mb-6" />
-          <p class="text-xl md:text-2xl font-bold">Zapier</p>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200">
-          <img src="/stack/4.png" alt="Framer" class="h-12 md:h-16 w-auto mb-4 md:mb-6" />
-          <p class="text-xl md:text-2xl font-bold">Framer</p>
-        </div>
+    <!-- Bottom row -->
+    <div class="w-full max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+      <div class="stack-card bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200 transition-all duration-300 opacity-0 translate-y-8" style="transition-delay: 400ms;">
+        <img src="/stack/3.png" alt="Zapier" class="h-12 md:h-16 w-auto mb-4 md:mb-6 transition-transform duration-300" />
+        <p class="text-xl md:text-2xl font-bold">Zapier</p>
       </div>
-      
-      <!-- Bottom row -->
-      <div class="w-full max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200">
-          <img src="/stack/3.png" alt="Zapier" class="h-12 md:h-16 w-auto mb-4 md:mb-6" />
-          <p class="text-xl md:text-2xl font-bold">Zapier</p>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200">
-          <img src="/stack/4.png" alt="Framer" class="h-12 md:h-16 w-auto mb-4 md:mb-6" />
-          <p class="text-xl md:text-2xl font-bold">Framer</p>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200">
-          <img src="/stack/1.png" alt="Figma" class="h-12 md:h-16 w-auto mb-4 md:mb-6" />
-          <p class="text-xl md:text-2xl font-bold">Figma</p>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200">
-          <img src="/stack/2.png" alt="Notion" class="h-12 md:h-16 w-auto mb-4 md:mb-6" />
-          <p class="text-xl md:text-2xl font-bold">Notion</p>
-        </div>
+      <div class="stack-card bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200 transition-all duration-300 opacity-0 translate-y-8" style="transition-delay: 500ms;">
+        <img src="/stack/4.png" alt="Framer" class="h-12 md:h-16 w-auto mb-4 md:mb-6 transition-transform duration-300" />
+        <p class="text-xl md:text-2xl font-bold">Framer</p>
+      </div>
+      <div class="stack-card bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200 transition-all duration-300 opacity-0 translate-y-8" style="transition-delay: 600ms;">
+        <img src="/stack/1.png" alt="Figma" class="h-12 md:h-16 w-auto mb-4 md:mb-6 transition-transform duration-300" />
+        <p class="text-xl md:text-2xl font-bold">Figma</p>
+      </div>
+      <div class="stack-card bg-white rounded-lg shadow-md p-6 md:p-8 flex flex-col items-center justify-center border-4 border-gray-200 transition-all duration-300 opacity-0 translate-y-8" style="transition-delay: 700ms;">
+        <img src="/stack/2.png" alt="Notion" class="h-12 md:h-16 w-auto mb-4 md:mb-6 transition-transform duration-300" />
+        <p class="text-xl md:text-2xl font-bold">Notion</p>
       </div>
     </div>
   </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Setup Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // When the stack section comes into view
+        if (entry.isIntersecting) {
+          // Animate background images with a slight delay
+          setTimeout(() => {
+            document.querySelector('.bg-left')?.classList.add('animate-in');
+            
+            // Slight delay for the right background for a staggered effect
+            setTimeout(() => {
+              document.querySelector('.bg-right')?.classList.add('animate-in');
+            }, 200);
+          }, 300);
+          
+          // Animate the title
+          setTimeout(() => {
+            document.querySelector('.stack-title')?.classList.add('animate-in');
+          }, 600);
+          
+          // Animate all stack cards
+          document.querySelectorAll('.stack-card').forEach((card) => {
+            card.classList.add('animate-in');
+          });
+          
+          // Once animation is complete, remove the observer
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.2, // Trigger when 20% of the element is visible
+      rootMargin: '0px' // No additional margin
+    });
+    
+    // Ensure all animated elements start with their initial state
+    document.querySelector('.bg-left')?.classList.remove('animate-in');
+    document.querySelector('.bg-right')?.classList.remove('animate-in');
+    document.querySelector('.stack-title')?.classList.remove('animate-in');
+    document.querySelectorAll('.stack-card').forEach((card) => {
+      card.classList.remove('animate-in');
+    });
+    
+    // Observe the stack section
+    const stackSection = document.querySelector('.relative.w-full.min-h-screen');
+    if (stackSection) {
+      observer.observe(stackSection);
+    }
+    
+    // Add hover effects to stack cards
+    document.querySelectorAll('.stack-card').forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+        // Add hover class
+        card.classList.add('card-hover');
+        
+        // Animate the icon inside
+        const img = card.querySelector('img');
+        if (img) {
+          img.classList.add('icon-hover');
+        }
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        // Remove hover class
+        card.classList.remove('card-hover');
+        
+        // Reset the icon animation
+        const img = card.querySelector('img');
+        if (img) {
+          img.classList.remove('icon-hover');
+        }
+      });
+    });
+  });
+  </script>
+
+<style>
+/* Base transition styles */
+.bg-left, .bg-right, .stack-title, .stack-card {
+  transition: opacity 0.8s ease-out, 
+              transform 1s ease-out;
+}
+
+/* Animated state for background images */
+.bg-left.animate-in,
+.bg-right.animate-in {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+}
+
+/* Animated state for title and cards */
+.stack-title.animate-in,
+.stack-card.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover effects for cards */
+.card-hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  border-color: #f4813f !important;
+  background-color: #fff9f5;
+}
+
+/* Icon hover animation */
+.icon-hover {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Add pulsing effect to cards on hover */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(244, 129, 63, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(244, 129, 63, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(244, 129, 63, 0); }
+}
+
+.card-hover {
+  animation: pulse 2s infinite;
+}
+</style>

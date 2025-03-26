@@ -1,49 +1,300 @@
-# Astro with Tailwind CSS
+<section class="flex flex-col lg:flex-row w-full min-h-[38rem] mt-6 md:mt-12 lg:mt-24 overflow-hidden relative">
+  <!-- Scribble Background Effect -->
+  <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0" id="scribbleBackground">
+    <!-- ↓↓↓ VISIBILITY SETTING: Adjust opacity value (0.0-1.0) to control overall background visibility ↓↓↓ -->
+    <canvas id="bgCanvas" class="w-full h-full opacity-50"></canvas> <!-- Increased from 0.4 to 0.6 for better visibility -->
+  </div>
 
-See the article https://fogbender.com/blog/customizing-tailwind-css-in-astro
+  <!-- Left section with pattern and overlay - HIDDEN ON MOBILE -->
+  <div class="relative hidden lg:block lg:w-[6%] lg:h-[30rem] mx-auto lg:my-auto order-1">
+    <img src="/hero-banner.png" alt="Left pattern" class="w-full h-full object-cover" />
 
-```
-npm create astro@latest -- --template JLarky/astro-tailwind-template
-```
+    <!-- Logo and text overlay -->
+    <div class="absolute -top-4 scale-90 sm:scale-110 lg:left-[138%] w-72 left-1/2 -translate-x-1/2 lg:translate-x-0">
+      <div class="flex">
+        <img src="/LOGO.png" alt="Logo" class="w-12 sm:w-20 h-auto mr-3" />
+        <div class="hidden sm:block w-2 h-16 bg-black"></div>
+        <p class="text-xs font-light ml-2 sm:ml-4 max-w-[220px] sm:max-w-none">
+          At nexCraft, we craft vibrant and innovative digital products
+          tailored to your needs so that no one has to settle for the same old
+          <span class="text-orange-500">experience</span>.
+        </p>
+      </div>
+    </div>
+  </div>
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/JLarky/astro-tailwind-template)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/JLarky/astro-tailwind-template)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/JLarky/astro-tailwind-template)
+  <!-- Logo for mobile only -->
+  <div class="flex lg:hidden items-center justify-center mt-4 mb-4">
+    <img src="/LOGO.png" alt="Logo" class="w-16 h-auto" />
+    <p class="text-xs font-light ml-4 max-w-[200px]">
+      At nexCraft, we craft vibrant and innovative digital products
+      tailored to your needs so that no one has to settle for the same old
+      <span class="text-orange-500">experience</span>.
+    </p>
+  </div>
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+  <!-- Middle section with large text -->
+  <div class="w-full lg:w-[68%] h-auto flex items-center justify-center order-3 lg:order-2 mt-8 lg:mt-0 px-4 lg:px-0 z-10">
+    <img src="/hero-nexcraft.png" alt="nexCRAFT" class="w-full h-auto max-w-full z-20 lg:max-w-[95%]" />
+  </div>
 
-## 🚀 Project Structure
+  <!-- Right section - HIDDEN ON MOBILE -->
+  <div class="hidden lg:flex lg:w-[28%] lg:h-[30rem] lg:-ml-12 my-auto flex-col order-3">
+    <!-- Navigation menu (desktop) -->
+    <div class="h-[15%] mx-auto items-center justify-around mb-2 font-bold pr-4">
+      <a href="/#contact" class="font-bold text-xl hover:[text-shadow:0_0_10px_#FFA500] ml-2 mr-4 transition-all">CONTACT</a>
+      <a href="/#about" class="font-bold text-xl hover:[text-shadow:0_0_10px_#FFA500] mr-4 transition-all">ABOUT US</a>
+      <a href="/#solutions" class="font-bold text-xl hover:[text-shadow:0_0_10px_#FFA500] transition-all">SOLUTIONS</a>
+    </div>
 
-Inside of your Astro project, you'll see the following folders and files:
+    <!-- Right orange pattern -->
+    <div class="h-[83%] w-full">
+      <img src="/right-orange-bg.png" alt="Right pattern" class="w-full h-full object-cover" />
+    </div>
 
-```
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+    <!-- Bottom action buttons -->
+    <div class="h-[15%] flex items-center mt-4 justify-end gap-6 pr-6">
+      <a href="/explore" class="flex items-center gap-2 px-6 py-2 border-2 border-orange-500 rounded-full text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+        <span class="font-bold">Explore More</span>
+      </a>
+      <a href="/book" class="flex items-center gap-2 px-6 py-2 bg-black text-orange-500 font-bold rounded-full text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        <span>BOOK A CALL</span>
+      </a>
+    </div>
+  </div>
+</section>
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+<!-- Mobile Menu Button -->
+<button class="lg:hidden fixed top-4 right-4 text-black z-50 bg-white p-2 rounded-md shadow-md" id="menuToggle">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+</button>
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+<!-- Mobile Menu Overlay (for closing when clicking outside) -->
+<div class="lg:hidden hidden fixed inset-0 bg-black bg-opacity-50 z-30" id="menuOverlay"></div>
 
-Any static assets, like images, can be placed in the `public/` directory.
+<!-- Mobile Menu (Hidden by default) -->
+<div class="lg:hidden hidden bg-white p-6 rounded-lg shadow-lg fixed top-0 left-0 w-full h-auto z-40" id="mobileMenu">
+  <div class="flex flex-col space-y-6 items-center pt-12">
+    <a href="/contact" class="font-bold text-xl menu-link">CONTACT</a>
+    <a href="/about" class="font-bold text-xl menu-link">ABOUT US</a>
+    <a href="/solutions" class="font-bold text-xl menu-link">SOLUTIONS</a>
+    <a href="/explore" class="flex items-center justify-center gap-2 px-6 py-2 border-2 border-orange-500 rounded-full text-sm mt-6 menu-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+      <span class="font-bold">Explore More</span>
+    </a>
+    <a href="/book" class="flex items-center justify-center gap-2 px-6 py-2 bg-black text-orange-500 font-bold rounded-full text-sm menu-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+      <span>BOOK A CALL</span>
+    </a>
+  </div>
 
-## 🧞 Commands
+  <!-- Close button -->
+  <button class="absolute top-4 right-4" id="closeMenu">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+</div>
 
-All commands are run from the root of the project, from a terminal:
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menuToggle');
+    const closeMenu = document.getElementById('closeMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuLinks = document.querySelectorAll('.menu-link');
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:3000`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+    function openMenu() {
+      if (mobileMenu) {
+        mobileMenu.classList.remove('hidden');
+      }
+      if (menuOverlay) {
+        menuOverlay.classList.remove('hidden');
+      }
+    }
 
-## 👀 Want to learn more?
+    function closeMenuFunc() {
+      if (mobileMenu) {
+        mobileMenu.classList.add('hidden');
+      }
+      if (menuOverlay) {
+        menuOverlay.classList.add('hidden');
+      }
+    }
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+    if (menuToggle && mobileMenu && closeMenu) {
+      // Open menu
+      menuToggle.addEventListener('click', openMenu);
+
+      // Close menu with close button
+      closeMenu.addEventListener('click', closeMenuFunc);
+
+      // Close menu when clicking overlay
+      if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeMenuFunc);
+      }
+
+      // Close menu when clicking a menu link
+      menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenuFunc);
+      });
+    }
+
+    // Setup scribble background
+    setupScribbleBackground();
+  });
+
+  // Scribble background animation
+  function setupScribbleBackground() {
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = (canvas as HTMLCanvasElement)?.getContext('2d');
+    if (!ctx || !canvas) return;
+
+    // Set canvas size to window size
+    function resizeCanvas() {
+      if (canvas) {
+        (canvas as HTMLCanvasElement).width = window.innerWidth;
+        (canvas as HTMLCanvasElement).height = window.innerHeight;
+      }
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // ======================================================================
+    // PARTICLE SETTINGS - Adjust these values to change the background effect
+    // ======================================================================
+
+    // Number of particles to display (more = denser effect, but more CPU intensive)
+    const PARTICLE_COUNT = 120;  // Increased from 100 to 120
+
+    // Size range of particles (min to max)
+    const MIN_PARTICLE_SIZE = 1;
+    const MAX_PARTICLE_SIZE = 4;  // Increased from 3 to 4
+
+    // Speed range of particles (lower = slower movement)
+    const MIN_PARTICLE_SPEED = -0.6;
+    const MAX_PARTICLE_SPEED = 0.6;
+
+    // Particle color (can be any valid CSS color)
+    const PARTICLE_COLOR = '#FF7F50';  // Coral color (orange-ish)
+
+    // ======================================================================
+    // CONNECTION SETTINGS - Adjust these to change how particles connect
+    // ======================================================================
+
+    // Maximum distance for particles to connect with lines
+    const MAX_CONNECTION_DISTANCE = 80;  // Increased from 150 to 180
+
+    // Line thickness for connections
+    const CONNECTION_LINE_WIDTH = 1.5;  // Increased from 1.0 to 1.5
+
+    // Connection opacity formula - Higher values = more visible lines
+    // Format: ${BASE_OPACITY - distance/OPACITY_DIVISOR}
+    const CONNECTION_BASE_OPACITY = 0.5;  // Increased from 0.2 to 0.5
+    const CONNECTION_OPACITY_DIVISOR = 800;  // Decreased from 1000 to 800 for stronger opacity
+
+    // Particle class
+    class Particle {
+      x;
+      y;
+      size;
+      speedX;
+      speedY;
+      color;
+
+      constructor() {
+        this.x = canvas ? Math.random() * (canvas as HTMLCanvasElement).width : 0;
+        this.y = canvas ? Math.random() * (canvas as HTMLCanvasElement).height : 0;
+        this.size = Math.random() * (MAX_PARTICLE_SIZE - MIN_PARTICLE_SIZE) + MIN_PARTICLE_SIZE;
+        this.speedX = Math.random() * (MAX_PARTICLE_SPEED - MIN_PARTICLE_SPEED) + MIN_PARTICLE_SPEED;
+        this.speedY = Math.random() * (MAX_PARTICLE_SPEED - MIN_PARTICLE_SPEED) + MIN_PARTICLE_SPEED;
+        this.color = PARTICLE_COLOR;
+      }
+
+      // Update particle position
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Bounce off edges
+        if (this.x < 0 || (canvas && this.x > (canvas as HTMLCanvasElement).width)) this.speedX *= -1;
+        if (this.y < 0 || (canvas && this.y > (canvas as HTMLCanvasElement).height)) this.speedY *= -1;
+      }
+
+      // Draw particle
+      draw() {
+        if (!ctx) return;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Create particles
+    const particles: Particle[] = [];
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(new Particle());
+    }
+
+    // Draw connecting lines between particles
+    function drawLines() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          // Only draw lines between particles that are close enough
+          if (distance < MAX_CONNECTION_DISTANCE) {
+            if (ctx) {
+              // Calculate opacity based on distance (closer = more opaque)
+              const opacity = CONNECTION_BASE_OPACITY - distance/CONNECTION_OPACITY_DIVISOR;
+
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(255, 127, 80, ${opacity})`;
+              ctx.lineWidth = CONNECTION_LINE_WIDTH;
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+    }
+
+    // Animation loop
+    function animate() {
+      if (ctx) {
+        if (canvas) {
+          ctx.clearRect(0, 0, (canvas as HTMLCanvasElement).width, (canvas as HTMLCanvasElement).height);
+        }
+      }
+
+      // Update and draw particles
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+
+      drawLines();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+</script>

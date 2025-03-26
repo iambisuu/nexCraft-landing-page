@@ -11,73 +11,7 @@ interface Props {
   }[];
 }
 
-const { 
-  sections = [
-    {
-      number: "01",
-      conceptText: "CONCEPT",
-      conceptSize: "16vh",
-      accentText: "Discovery",
-      accentTextSize: "15vh",
-      heading: "Heading",
-      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-    },
-    {
-      number: "02",
-      conceptText: "CONTENT",
-      conceptSize: "16vh",
-      accentText: "Content",
-      accentTextSize: "15vh",
-      heading: "Heading",
-      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-    },
-    {
-      number: "03",
-      conceptText: "STRUCTURE",
-      conceptSize: "13vh",
-      accentText: "Structure",
-      accentTextSize: "15vh",
-      heading: "Heading",
-      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-    },
-    {
-      number: "04",
-      conceptText: "VISUAL",
-      conceptSize: "16vh",
-      accentText: "Visual",
-      accentTextSize: "15vh",
-      heading: "Heading",
-      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-    },
-    {
-      number: "05",
-      conceptText: "CODE",
-      conceptSize: "16vh",
-      accentText: "Code",
-      accentTextSize: "15vh",
-      heading: "Heading",
-      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-    },
-    {
-      number: "06",
-      conceptText: "FUNCTION",
-      conceptSize: "16vh",
-      accentText: "Function",
-      accentTextSize: "15vh",
-      heading: "Heading",
-      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-    },
-    {
-      number: "07",
-      conceptText: "PROJECT",
-      conceptSize: "16vh",
-      accentText: "Project",
-      accentTextSize: "15vh",
-      heading: "Heading",
-      description: "At nexCraft, we craft vibrant and innovative digital products tailored to your needs so that no one has to settle for the same old"
-    }
-  ]
-} = Astro.props;
+const { sections } = Astro.props;
 ---
 
 <div class="concept-discovery-container">
@@ -93,21 +27,21 @@ const {
             <div id="current-number" class="text-2xl sm:text-3xl text-gray-800 font-medium transition-all">01.</div>
             <div class="animated-line"></div>
           </div>
-          
-          <!-- Concept Text (removed backdrop) --> 
-          <div class="concept-container relative overflow-visible">
-            <div 
+
+          <!-- Concept Text (removed backdrop) -->
+          <div class="concept-container relative overflow-visible mb-0">
+            <div
               id="concept-text-display"
-              class="font-black leading-none tracking-tight concept-text transition-all relative z-10"
-              style={`font-size: ${sections[0].conceptSize};`} 
+              class="font-black leading-none tracking-tight concept-text transition-all relative z-10 mb-0"
+              style={`font-size: ${sections[0].conceptSize};`}
             >
               {sections[0].conceptText}
             </div>
           </div>
 
           <!-- Accent Text with stroke effect -->
-          <div class="accent-container relative mb-">
-            <p 
+          <div class="accent-container relative mb-0" style="margin-top: -20px;">
+            <p
               id="accent-text-display"
               class="font-cursive text-[#FC6403] accent-text transition-all relative z-10"
               style={`font-size: ${sections[0].accentTextSize};`}
@@ -142,7 +76,7 @@ const {
       </div>
     ))}
   </div>
-  
+
   <!-- Progress indicator with orange line that fills as you scroll -->
   <div class="progress-bar hidden sm:block">
     <div class="progress-line-container">
@@ -156,6 +90,8 @@ const {
     </div>
   </div>
 </div>
+
+
 
 <style>
   .font-cursive {

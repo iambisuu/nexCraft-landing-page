@@ -42,12 +42,11 @@ const carouselImages = [
     </div>
   </div>
 
-  <!-- Carousel Section - Responsive based on screen size -->
+  <!-- Marquee Section -->
   <div class="w-full overflow-hidden">
-    <!-- Mobile Carousel (scrollable) -->
-    <div id="image-carousel-mobile" class="flex overflow-x-auto snap-x snap-mandatory md:hidden">
-      {carouselImages.map((image) => (
-        <div class="relative flex-none w-full snap-center">
+    <div id="image-marquee" class="flex">
+      {carouselImages.concat(carouselImages).map((image, index) => (
+        <div key={index} class="relative flex-none w-full md:w-1/2 lg:w-1/5">
           <img
             src={image.url}
             alt="Developer workspace"
@@ -56,114 +55,11 @@ const carouselImages = [
         </div>
       ))}
     </div>
-
-    <!-- Tablet Carousel (2 images visible) -->
-    <div id="image-carousel-tablet" class="hidden md:flex lg:hidden">
-      {carouselImages.map((image) => (
-        <div class="relative flex-none w-1/2">
-          <img
-            src={image.url}
-            alt="Developer workspace"
-            class="w-full h-160 object-cover"
-          />
-        </div>
-      ))}
-    </div>
-
-    <!-- Desktop Carousel (all 5 images visible) -->
-    <div id="image-carousel-desktop" class="hidden lg:flex">
-      {carouselImages.map((image) => (
-        <div class="relative flex-none w-1/5">
-          <img
-            src={image.url}
-            alt="Developer workspace"
-            class="w-full h-160 xl:h-104 object-cover"
-          />
-        </div>
-      ))}
-    </div>
   </div>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const animatedHeading = document.getElementById('animated-heading');
-    const mobileCarousel = document.getElementById('image-carousel-mobile');
-
-    // Function to check if the element is in the viewport
-    function isInViewport(element: HTMLElement) {
-      const rect = element.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-    }
-
-    // Function to handle scroll events
-    function handleScroll() {
-      if (animatedHeading && isInViewport(animatedHeading)) {
-        animatedHeading.classList.add('fade-in-up');
-      }
-    }
-
-    // Add scroll event listener
-    window.addEventListener('scroll', handleScroll);
-
-    // Trigger scroll event on load to check initial position
-    window.dispatchEvent(new Event('scroll'));
-
-    // Optional: Add JavaScript for mobile carousel navigation
-    if (mobileCarousel) {
-      // Handle scroll events, add navigation buttons, etc.
-      // Example implementation would go here
-    }
-
-    // Function to start the carousel animation
-    function startCarouselAnimation() {
-      const carousel = document.getElementById('image-carousel-mobile');
-      let scrollAmount = 0;
-      let step = 1;
-
-      function animate() {
-        scrollAmount += step;
-        if (carousel && scrollAmount >= carousel.scrollWidth / 2) {
-          scrollAmount = 0;
-        }
-        if (carousel) {
-          carousel.scrollLeft = scrollAmount;
-        }
-        requestAnimationFrame(animate);
-      }
-
-      animate();
-    }
-
-    // Start the carousel animation
-    startCarouselAnimation();
-  });
-</script>
-
 <style>
   /* Additional styles for responsiveness */
-  /* Use native CSS features for smoother scrolling */
-  #image-carousel-mobile {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Hide scrollbar but keep functionality */
-  #image-carousel-mobile::-webkit-scrollbar {
-    display: none;
-  }
-
-  #image-carousel-mobile {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  /* Custom height classes for taller images */
   .h-128 {
     height: 25rem; /* 512px - doubled from 16rem */
   }
@@ -191,4 +87,64 @@ const carouselImages = [
   .fade-in-up {
     animation: fadeInUp 1s ease-out forwards;
   }
+
+  /* Marquee Animation */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  #image-marquee {
+    animation: marquee 15s linear infinite;
+  }
+
+  /* Ensure smooth scrolling */
+  #image-marquee {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  #image-marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  #image-marquee {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const animatedHeading = document.getElementById('animated-heading');
+
+    // Function to check if the element is in the viewport
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+
+    // Function to handle scroll events
+    function handleScroll() {
+      if (animatedHeading && isInViewport(animatedHeading)) {
+        animatedHeading.classList.add('fade-in-up');
+      }
+    }
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Trigger scroll event on load to check initial position
+    window.dispatchEvent(new Event('scroll'));
+  });
+</script>

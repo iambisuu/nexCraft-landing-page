@@ -18,9 +18,9 @@ const {
 } = Astro.props;
 ---
 
-<div class="w-full max-w-6xl px-4  mx-auto">
+<div class="w-full max-w-7xl px-4  mx-auto">
   <!-- Main showcase section - black outer container -->
-  <div class="bg-black rounded-xl overflow-hidden shadow-lg">
+  <div class="bg-black rounded-xl overflow-hidden shadow-lg w-full mx-auto relative z-10">
     <!-- Red middle box - touches left and top edges of black box -->
     <div class="bg-red-500 rounded-t-lg ml-[8%] mr-[8%] mt-[2%] overflow-hidden">
       <!-- Content box with only image -->
@@ -34,18 +34,18 @@ const {
   <div class="grid grid-cols-3 gap-4 mt-4">
     <!-- Client info -->
     <div>
-      <p class="text-sm">Client Project</p>
-      <p class="font-bold">{clientName}</p>
+      <!-- <p class="text-sm">Client Project</p> -->
+      <p class="font-bold text-4xl">{clientName}</p>
     </div>
     
     <!-- Testimonial -->
     <div>
-      <p class="text-xs leading-tight">"{testimonial}"</p>
+      <p class="text-lg leading-tight">"{testimonial}"</p>
     </div>
     
     <!-- Project details -->
     <div class="text-right">
-      <p class="text-xs mb-1">{timeframe}</p>
+      <p class="text-md mb-1">{timeframe}</p>
       <ul class="text-xs ">
         {services.map((service) => (
           <li>• {service}</li>

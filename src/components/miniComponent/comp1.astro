@@ -13,12 +13,11 @@ interface Props {
 
 const { sections } = Astro.props;
 ---
-
 <div class="concept-discovery-container">
   <!-- Fixed position display panel that shows current content -->
   <div class="sticky-panel">
     <div class="display-content pb-20 sm:pb-24 max-sm:px-4">
-      <h1 class=" sm:text-5xl text-3xl uppercase tracking-tight mb-24 sm:ml-24 font-medium leading-none md:text-6xl">Why Choose Us</h1>
+      <h1 class="sm:text-5xl text-3xl uppercase tracking-tight mb-24 sm:ml-24 font-medium leading-none md:text-6xl">Why Choose Us</h1>
       <div class="flex flex-col md:flex-row items-start gap-8 font-sans w-full max-w-7xl mx-auto">
         <!-- Left Content: Number + Concept Text + Accent Text -->
         <div class="relative w-full md:w-[60%] flex flex-col">
@@ -28,8 +27,8 @@ const { sections } = Astro.props;
             <div class="animated-line"></div>
           </div>
 
-          <!-- Concept Text (removed backdrop) -->
-          <div class="concept-container relative overflow-visible mb-0">
+          <!-- Concept and Accent Text Container -->
+          <div class="concept-accent-container relative overflow-visible mb-0">
             <div
               id="concept-text-display"
               class="font-black leading-none tracking-tight concept-text transition-all relative z-10 mb-0"
@@ -37,17 +36,13 @@ const { sections } = Astro.props;
             >
               {sections[0].conceptText}
             </div>
-          </div>
-
-          <!-- Accent Text with stroke effect -->
-          <div class="accent-container relative mb-0" style="margin-top: -20px;">
-            <p
+            <div
               id="accent-text-display"
-              class="font-cursive text-[#FC6403] accent-text transition-all relative z-10"
-              style={`font-size: ${sections[0].accentTextSize};`}
+              class="font-cursive text-[#FC6403] accent-text mt-6 transition-all absolute z-20"
+              style={`font-size: ${sections[0].accentTextSize}; top: 0; left: 0;`}
             >
               {sections[0].accentText}
-            </p>
+            </div>
             <div class="accent-decoration"></div>
           </div>
         </div>
@@ -91,8 +86,6 @@ const { sections } = Astro.props;
   </div>
 </div>
 
-
-
 <style>
   .font-cursive {
     font-family: 'Brush Script MT', cursive, serif;
@@ -116,7 +109,7 @@ const { sections } = Astro.props;
     background-color: #fff;
     overflow: hidden;
   }
-  
+
   .display-content {
     min-height: 80vh;
     display: flex;
@@ -130,11 +123,11 @@ const { sections } = Astro.props;
     width: 0;
     transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  
+
   .active .animated-line {
     width: 120px;
   }
-  
+
   .accent-decoration {
     position: absolute;
     height: 8px;
@@ -147,11 +140,11 @@ const { sections } = Astro.props;
     transform-origin: left;
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
   }
-  
+
   .active .accent-decoration {
     transform: scaleX(1);
   }
-  
+
   .separator {
     width: 60px;
     height: 4px;
@@ -160,7 +153,7 @@ const { sections } = Astro.props;
     transform-origin: left;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
   }
-  
+
   .active .separator {
     transform: scaleX(1);
   }
@@ -179,81 +172,81 @@ const { sections } = Astro.props;
     position: relative;
   }
 
-/* Progress bar base styling */
-.progress-bar {
-  position: fixed;
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  z-index: 20;
-  /* Hide on mobile by default */
-  display: none;
-}
-
-/* Show on desktop/tablet only (sm breakpoint and above) */
-@media (min-width: 640px) {
+  /* Progress bar base styling */
   .progress-bar {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50%;
     display: flex;
+    flex-direction: column;
+    z-index: 20;
+    /* Hide on mobile by default */
+    display: none;
   }
-}
 
-/* Note: The "hidden sm:block" classes in your HTML also handle this behavior,
-   but this CSS ensures it works even if those classes are removed */
+  /* Show on desktop/tablet only (sm breakpoint and above) */
+  @media (min-width: 640px) {
+    .progress-bar {
+      display: flex;
+    }
+  }
 
-.progress-line-container {
-  position: absolute;
-  width: 2px;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  transform: translateX(-50%);
-  overflow: hidden;
-}
+  /* Note: The "hidden sm:block" classes in your HTML also handle this behavior,
+     but this CSS ensures it works even if those classes are removed */
 
-.progress-line-bg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
-}
+  .progress-line-container {
+    position: absolute;
+    width: 2px;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    overflow: hidden;
+  }
 
-.progress-line-fill {
-  position: absolute;
-  width: 100%;
-  height: 0%;
-  bottom: 0;
-  background-color: #FC6403;
-  transition: height 0.3s ease;
-}
+  .progress-line-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 
-.progress-dots {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-}
+  .progress-line-fill {
+    position: absolute;
+    width: 100%;
+    height: 0%;
+    bottom: 0;
+    background-color: #FC6403;
+    transition: height 0.3s ease;
+  }
 
-.progress-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #fff;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
+  .progress-dots {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
 
-.progress-dot.active {
-  background-color: #FC6403;
-  border-color: #FC6403;
-  transform: scale(1.3);
-}
+  .progress-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .progress-dot.active {
+    background-color: #FC6403;
+    border-color: #FC6403;
+    transform: scale(1.3);
+  }
 
   .transition-all {
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -285,28 +278,28 @@ const { sections } = Astro.props;
     const progressDots = document.querySelectorAll('.progress-dot');
     const progressLineFill = document.querySelector('.progress-line-fill');
     const displayContent = document.querySelector('.display-content');
-    
+
     let currentIndex = 0;
     let animating = false;
-    
+
     // Active initial state
     displayContent?.classList.add('active');
     progressDots[0]?.classList.add('active');
-    
+
     // Update progress line based on visible section rather than scroll position
     function updateProgressLine() {
       const totalSections = scrollTriggers.length;
       if (totalSections === 0) return;
-      
+
       const progress = (currentIndex) / (totalSections - 1);
       if (progressLineFill) {
         (progressLineFill as HTMLElement).style.height = `${progress * 100}%`;
       }
     }
-    
+
     // Initial progress line update
     updateProgressLine();
-    
+
     // Create intersection observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -314,7 +307,7 @@ const { sections } = Astro.props;
           const index = parseInt((entry.target as HTMLElement).dataset.index || '0');
           if (index !== currentIndex) {
             animating = true;
-            
+
             // Update active dot
             progressDots.forEach((dot, i) => {
               if (i === index) {
@@ -323,19 +316,19 @@ const { sections } = Astro.props;
                 dot.classList.remove('active');
               }
             });
-            
+
             // Remove active state for animation reset
             displayContent?.classList.remove('active');
-            
+
             const sectionData = (entry.target as HTMLElement).dataset.section ? JSON.parse((entry.target as HTMLElement).dataset.section as string) : null;
-            
+
             setTimeout(() => {
               updateDisplay(sectionData, index > currentIndex ? 'down' : 'up');
               currentIndex = index;
-              
+
               // Update progress line
               updateProgressLine();
-              
+
               // Add active state back after content change
               setTimeout(() => {
                 displayContent?.classList.add('active');
@@ -348,12 +341,12 @@ const { sections } = Astro.props;
     }, {
       threshold: 0.5 // Increase threshold to ensure better visibility
     });
-    
+
     // Observe each trigger
     scrollTriggers.forEach(trigger => {
       observer.observe(trigger);
     });
-    
+
     // Add click handler for progress dots
     progressDots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
@@ -370,13 +363,13 @@ const { sections } = Astro.props;
         }
       });
     });
-    
+
     // Update the display with animation
     function updateDisplay(sectionData: { number: string; conceptText: string; conceptSize?: string; accentText: string; accentTextSize?: string; heading: string; description: string; }, direction: 'up' | 'down') {
       // Set up animation direction
       const incomingTransform = direction === 'down' ? 'translateY(40px)' : 'translateY(-40px)';
       const outgoingTransform = direction === 'down' ? 'translateY(-40px)' : 'translateY(40px)';
-      
+
       // Animate out current content
       if (conceptTextDisplay) {
         conceptTextDisplay.style.opacity = '0';
@@ -397,7 +390,7 @@ const { sections } = Astro.props;
       if (currentNumber) {
         currentNumber.style.opacity = '0';
       }
-      
+
       // Change content after fade-out
       setTimeout(() => {
         // Update sizes and prepare incoming animation
@@ -407,7 +400,7 @@ const { sections } = Astro.props;
         if (accentTextDisplay) {
           accentTextDisplay.style.fontSize = sectionData.accentTextSize || '15vh';
         }
-        
+
         // Set new text content
         if (conceptTextDisplay) {
           conceptTextDisplay.textContent = sectionData.conceptText;
@@ -424,7 +417,7 @@ const { sections } = Astro.props;
         if (currentNumber) {
           currentNumber.textContent = `${sectionData.number}.`;
         }
-        
+
         // Position incoming content
         if (conceptTextDisplay) {
           conceptTextDisplay.style.transform = incomingTransform;
@@ -438,7 +431,7 @@ const { sections } = Astro.props;
         if (descriptionDisplay) {
           descriptionDisplay.style.transform = incomingTransform;
         }
-        
+
         // Trigger animation in
         setTimeout(() => {
           if (conceptTextDisplay) {
